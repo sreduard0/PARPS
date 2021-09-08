@@ -1,8 +1,8 @@
 @extends('layout')
 @section('title', 'Início')
+@section('home', 'active')
 @section('css')
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -28,13 +28,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <section class="col ">
-
-
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">DataTable with default features</h3>
+                                <button class="btn btn-success">Nova entrada</button>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="visitors" class="table table-bordered table-striped">
                                     <thead>
@@ -465,24 +462,24 @@
                     <section class="col-lg-3">
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>150</h3>
-                                <p>New Orders</p>
+                                <h3>5</h3>
+                                <p>Visitantes na OM</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="icon ion-md-people"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                                <p>Bounce Rate</p>
+                        </div>
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>53</sup></h3>
+
+                                <p>Visitantes no dia</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i class="icon ion-md-people"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
                         </div>
 
 
@@ -514,7 +511,6 @@
 
 @endsection
 @section('plugins')
-
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/numeric-comma.js') }}"></script>
@@ -530,7 +526,5 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/visitors_list_portuguese.js') }}"></script>
-    <!-- daterangepicker -->
-    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
 @endsection
