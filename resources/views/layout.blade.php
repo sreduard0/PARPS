@@ -13,12 +13,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet"
         href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     @yield('css')
@@ -28,7 +28,7 @@
 
 </head>
 
-<body class="dark-mode hold-transition sidebar-mini layout-fixed">
+<body class=" @if (session('theme') == 1) dark-mode @endif hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="AdminLTELogo" height="60" width="60">
@@ -51,13 +51,38 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item">
-                            <a href="/" class="nav-link">
+                        <li class="nav-item ">
+                            <a href="/" class="nav-link @yield('home')">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Home
                                 </p>
                             </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Cadastrar
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="pages/layout/top-nav.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Empresa</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Visitantes</p>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
                         {{-- <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -155,6 +180,7 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('plugins/moment/locales.js') }}"></script>
     <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.j') }}s"></script>
