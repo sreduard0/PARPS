@@ -12,7 +12,7 @@ class Authenticate
 
         $session = session('user');
         if (!$session) {
-            return redirect()->route('login');
+            return redirect('http://sistao.3bsup.eb.mil.br');
         }
         return $next($request);
     }

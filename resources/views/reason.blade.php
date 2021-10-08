@@ -1,7 +1,10 @@
 @extends('layout')
-@section('title', 'Início')
-@section('home', 'active')
+@section('title', 'Motivos')
+@section('register_open', 'menu-open')
+@section('register', 'active')
+@section('reason', 'active')
 @section('css')
+
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <!-- DataTables -->
@@ -19,7 +22,7 @@
                 <div class="row mb-2">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                     <div class="col-sm-6">
-                        <h1 class="m-0">Painel de controle</h1>
+                        <h1 class="m-0">Motivos</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -33,8 +36,8 @@
                     <section class="col ">
                         <div class="card">
                             <div class="card-header">
-                                <button class="float-r btn btn-success" data-toggle="modal" data-target="#register">Nova
-                                    entrada</button>
+                                <button class="float-r btn btn-success" data-toggle="modal" data-target="#register">Novo
+                                    motivo</button>
                             </div>
                             <div class="card-body">
                                 <table id="visitors" class="table table-bordered table-striped">
@@ -634,5 +637,4 @@
     <script src="{{ asset('plugins/inputmask/jquery.inputmask.min.js') }}"></script>
     <!-- date-range-picker -->
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-
 @endsection

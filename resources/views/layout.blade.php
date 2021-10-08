@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') - PARPS</title>
+    <title> PARPS - @yield('title')</title>
     {{-- ==================================== CSS/JS ===================================== --}}
 
     <!-- Google Font: Source Sans Pro -->
@@ -17,11 +17,17 @@
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet"
         href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+
+    {{-- CSS ESPECIFICO --}}
+    @yield('css')
+    {{-- CSS ESPECIFICO --}}
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/util.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-    @yield('css')
+
     @yield('script')
 
     {{-- ====================================/ CSS/JS ===================================== --}}
@@ -52,16 +58,16 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item ">
-                            <a href="/" class="nav-link @yield('home')">
+                            <a href="{{ route('home') }}" class="nav-link @yield('home')">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
-                                    Home
+                                    Início
                                 </p>
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item @yield('register_open')">
+                            <a href="#" class="nav-link @yield('register')">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Cadastrar
@@ -69,81 +75,67 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                <li class="nav-item ">
+                                    <a href="{{ route('enterprise') }}" class="nav-link @yield('enterprise')">
+                                        <i class="fa fa-building nav-icon"></i>
                                         <p>Empresa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="{{ route('visitors') }}" class="nav-link @yield('visitors')">
+                                        <i class="fa fa-users nav-icon"></i>
                                         <p>Visitantes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('destiny') }}" class="nav-link @yield('destiny')">
+                                        <i class="fa fa-map-marker-alt nav-icon"></i>
+                                        <p>Destinos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('reason') }}" class="nav-link @yield('reason')">
+                                        <i class="fa fa-list-ul nav-icon"></i>
+                                        <p>Motivos</p>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li class="nav-item @yield('reports_open')">
+                            <a href="#" class="nav-link @yield('reports')">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
+                                <p>
+                                    Relatorios
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ">
+                                    <a href="{{ route('reports_enterprise') }}"
+                                        class="nav-link @yield('reports_enterprise')">
+                                        <i class="fa fa-building nav-icon"></i>
+                                        <p>Por empresa</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('reports_visitors') }}"
+                                        class="nav-link @yield('reports_visitors')">
+                                        <i class="fa fa-users nav-icon"></i>
+                                        <p>Por visitantes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('reports_date') }}" class="nav-link @yield('reports_date')">
+                                        <i class="fa fa-calendar nav-icon"></i>
+                                        <p>Por data</p>
                                     </a>
                                 </li>
 
                             </ul>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Layout Options
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">6</span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation + Sidebar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/boxed.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Boxed</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Navbar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/fixed-footer.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Footer</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Collapsed Sidebar</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> --}}
                     </ul>
                 </nav>
             </div>
@@ -154,7 +146,7 @@
         <footer class="main-footer align-items-center ">
             <footer>
                 <div class="text-center">
-                    &copy;PARPS 2021 (v1.0) &copy;SisTAO 2021 (v1.0) <br>
+                    &copy;PARPS {{ date('Y') }} (v1.0) &copy;SisTAO {{ date('Y') }} (v1.0) <br>
                     Desenvolvido por: Eduardo Martins
                 </div>
             </footer>

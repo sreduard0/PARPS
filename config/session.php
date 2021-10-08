@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => 'database',
 
     /*
     |--------------------------------------------------------------------------
@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_CONNECTION', null),
+    'connection' => 'sistao',
 
     /*
     |--------------------------------------------------------------------------
@@ -125,11 +125,7 @@ return [
     | new session cookie is created by the framework for every driver.
     |
     */
-
-    'cookie' => env(
-        'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
-    ),
+    'cookie' => 'bsup_session',
 
     /*
     |--------------------------------------------------------------------------
@@ -155,7 +151,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain' => '.3bsup.eb.mil.br',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,7 +160,7 @@ return [
     |
     | By setting this option to true, session cookies will only be sent back
     | to the server if the browser has a HTTPS connection. This will keep
-    | the cookie from being sent to you when it can't be done securely.
+    | the cookie from being sent to you if it can not be done securely.
     |
     */
 

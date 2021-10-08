@@ -1,7 +1,10 @@
 @extends('layout')
-@section('title', 'Início')
-@section('home', 'active')
+@section('title', 'Visitantes')
+@section('register_open', 'menu-open')
+@section('register', 'active')
+@section('visitors', 'active')
 @section('css')
+
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <!-- DataTables -->
@@ -33,8 +36,8 @@
                     <section class="col ">
                         <div class="card">
                             <div class="card-header">
-                                <button class="float-r btn btn-success" data-toggle="modal" data-target="#register">Nova
-                                    entrada</button>
+                                <button class="float-r btn btn-success" data-toggle="modal" data-target="#register">Novo
+                                    visitante</button>
                             </div>
                             <div class="card-body">
                                 <table id="visitors" class="table table-bordered table-striped">
@@ -634,5 +637,4 @@
     <script src="{{ asset('plugins/inputmask/jquery.inputmask.min.js') }}"></script>
     <!-- date-range-picker -->
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-
 @endsection
