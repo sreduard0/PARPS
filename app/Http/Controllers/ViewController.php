@@ -14,12 +14,14 @@ class ViewController extends Controller
 
     function enterprise()
     {
+
         return view('enterprise');
     }
 
     public function visitors()
     {
         return view('visitors');
+        
     }
 
     public function reason()
