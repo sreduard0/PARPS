@@ -1,7 +1,9 @@
 @extends('layout')
-@section('title', 'Início')
-@section('home', 'active')
-@section('title-header', 'Controle de visitantes')
+@section('title', 'Destinos')
+@section('register_open', 'menu-open')
+@section('register', 'active')
+@section('destination', 'active')
+@section('title-header', 'Cadastro de destinos')
 @section('css')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -14,54 +16,38 @@
     <section class="col ">
         <div class="card">
             <div class="card-header">
-                <button class="float-r btn btn-success" data-toggle="modal" data-target="#register">Nova
-                    entrada</button>
+                <button class="float-r btn btn-success" data-toggle="modal" data-target="#register">Novo
+                    destino</button>
             </div>
             <div class="card-body">
                 <table id="visitors" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th width="20px">#</th>
-                            <th>Visitante</th>
-                            <th>Empresa</th>
-                            <th>Destino</th>
-                            <th>Crachá</th>
-                            <th>Registrado por</th>
-                            <th>Entrada</th>
-                            <th>Ações</th>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Josnei da Silva Sauro - <i class="fa fa-steering-wheel"></i></td>
-                            <td>CAT</td>
-                            <td>Destino</td>
-                            <td>5</td>
-                            <td>Claudio</td>
-                            <td>10/10/21 10:10</td>
-                            <td>
-                                <button class="btn btn-primary" title="Ver perfil do visitante"><i
-                                        class="fa fa-user"></i></button>
-                                <button class="btn btn-success" title="Encerrar entrada"><i
-                                        class="fa fa-check"></i></button>
+                            <td>Trident</td>
+                            <td>Internet
+                                Explorer 4.0
                             </td>
+                            <td>Win 95+</td>
+                            <td> 4</td>
+                            <td>X</td>
                         </tr>
-
                         <tr>
-                            <td>2</td>
-                            <td>Cleiton Cidnei</td>
-                            <td>CAT</td>
-                            <td>Destino</td>
-                            <td>6</td>
-                            <td>Claudio</td>
-                            <td>10/10/21 10:10</td>
-                            <td>
-                                <button class="btn btn-primary" title="Ver perfil do visitante"><i
-                                        class="fa fa-user"></i></button>
-                                <button class="btn btn-success" title="Encerrar entrada"><i
-                                        class="fa fa-check"></i></button>
+                            <td>Trident</td>
+                            <td>Internet
+                                Explorer 5.0
                             </td>
+                            <td>Win 95+</td>
+                            <td>5</td>
+                            <td>C</td>
                         </tr>
                     </tbody>
                 </table>
@@ -74,8 +60,7 @@
 @section('modal')
 
     <!-- Modal -->
-    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,26 +83,17 @@
                                 <option>Washington</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="company_id">Motorista</label>
-                            <select class="form-control">
-                                <option value="1">Sim</option>
-                                <option selected value="1">Não</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone1">Telefone</label>
-                            <input type="text" class="form-control" data-inputmask="'mask': ['(99) 9 9999-9999']"
-                                inputmode="text" data-mask="" id="phone1" name="phone1" placeholder="Telefone" value="">
+                        <div class="form-group col-md-4">
+                            <label for="name">Fone:</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="Digite seu nome completo" value="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label>Entrada</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="born_at" value="{{ date('d/m/Y h:m') }}"
-                                    disabled>
-                                <input type="hidden" id="born_at" name="born_at" value="{{ date('d/m/Y h:m') }}">
+                            <div class="input-group date" id="born_at" data-target-input="nearest">
+                                <input type="text" class="form-control" id="born_at" name="born_at" value="">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                 </div>
                             </div>
@@ -195,8 +171,6 @@
             $('.select2').select2({
                 dropdownParent: $("#register")
             });
-
-            $('[data-mask]').inputmask()
 
         })
     </script>

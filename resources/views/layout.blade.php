@@ -27,14 +27,15 @@
     <link rel="stylesheet" href="{{ asset('css/util.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     @yield('script')
 
     {{-- ====================================/ CSS/JS ===================================== --}}
 
 </head>
 
-<body class=" @if (session('theme') == 1) dark-mode @endif hold-transition sidebar-mini layout-fixed">
+<body class=" @if (session('theme') == 1) dark-mode @endif dark-mode hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="AdminLTELogo" height="60" width="60">
@@ -88,7 +89,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('destiny') }}" class="nav-link @yield('destiny')">
+                                    <a href="{{ route('destination') }}" class="nav-link @yield('destination')">
                                         <i class="fa fa-map-marker-alt nav-icon"></i>
                                         <p>Destinos</p>
                                     </a>
@@ -108,7 +109,7 @@
                             <a href="#" class="nav-link @yield('reports')">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
-                                    Relatorios
+                                    Relatórios
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -141,8 +142,79 @@
             </div>
         </aside>
 
-        @yield('content')
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                                class="fas fa-bars"></i></a>
+                        <div class="col-sm-6">
+                            <h1 class="m-0">@yield('title-header')</h1>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
 
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        {{-- Conteudo --}}
+
+                        @yield('content')
+
+                        {{-- /CONTEUDO --}}
+                        <section class="col-lg-3">
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3>5</h3>
+                                    <p>Visitantes na OM</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="icon ion-md-people"></i>
+                                </div>
+
+                            </div>
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3>53</sup></h3>
+
+                                    <p>Visitantes no dia</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="icon ion-md-people"></i>
+                                </div>
+
+                            </div>
+
+
+                            <div class="card bg-default">
+                                <div class="card-header border-0 bg-primary">
+
+                                    <h3 class="card-title">
+                                        <i class="far fa-calendar-alt"></i>
+                                        Calendário
+                                    </h3>
+                                    <!-- /. tools -->
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body pt-0">
+                                    <!--The calendar -->
+                                    <div id="calendar" style="width: 100%"></div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
+                        </section>
+                        <!-- right col -->
+                    </div>
+                    <!-- /.row (main row) -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
         <footer class="main-footer align-items-center ">
             <footer>
                 <div class="text-center">
@@ -179,6 +251,8 @@
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.j') }}s"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.js') }}"></script>
+    <!-- date-range-picker -->
+    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     @yield('plugins')
     {{-- ====================================/ PLUGINS ===================================== --}}
 </body>

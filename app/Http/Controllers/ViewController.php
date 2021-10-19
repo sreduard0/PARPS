@@ -21,7 +21,7 @@ class ViewController extends Controller
     public function visitors()
     {
         return view('visitors');
-        
+
     }
 
     public function reason()
@@ -29,9 +29,9 @@ class ViewController extends Controller
         return view('reason');
     }
 
-    public function destiny()
+    public function destination()
     {
-        return view('destiny');
+        return view('destination');
     }
 
 //=========================[RELARÓRIOS]===========================//
