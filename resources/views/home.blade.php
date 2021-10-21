@@ -18,7 +18,7 @@
                     entrada</button>
             </div>
             <div class="card-body">
-                <table id="visitors" class="table table-bordered table-striped">
+                <table id="table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th width="20px">#</th>
@@ -87,8 +87,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col">
-                            <label for="company_id">Visitante</label>
-                            <select class="select2" style="width: 100%;">
+                            <label for="visitor_id">Visitante</label>
+                            <select id="visitor_id" name="visitor_id" class="select2" style="width: 100%;">
                                 <option selected="selected">Alabama</option>
                                 <option>Alaska</option>
                                 <option>California</option>
@@ -99,25 +99,25 @@
                             </select>
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="company_id">Motorista</label>
-                            <select class="form-control">
+                            <label for="drive_id">Motorista</label>
+                            <select id="drive_id" name="drive_id" class="form-control">
                                 <option value="1">Sim</option>
                                 <option selected value="1">Não</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="phone1">Telefone</label>
+                            <label for="phone">Telefone</label>
                             <input type="text" class="form-control" data-inputmask="'mask': ['(99) 9 9999-9999']"
-                                inputmode="text" data-mask="" id="phone1" name="phone1" placeholder="Telefone" value="">
+                                inputmode="text" data-mask="" id="phone" name="phone" placeholder="Telefone" value="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label>Entrada</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="born_at" value="{{ date('d/m/Y h:m') }}"
-                                    disabled>
-                                <input type="hidden" id="born_at" name="born_at" value="{{ date('d/m/Y h:m') }}">
+                                <input type="text" class="form-control" value="{{ date('d/m/Y h:m') }}" disabled>
+                                <input type="hidden" id="entrance_date" name="entrance_date"
+                                    value="{{ date('d/m/Y h:m') }}">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                 </div>
                             </div>
@@ -125,8 +125,8 @@
 
 
                         <div class="form-group col">
-                            <label for="company_id">Destino:</label>
-                            <select class="select2" style="width: 100%;">
+                            <label for="destination_id">Destino:</label>
+                            <select id="destination_id" name="destination" class="select2" style="width: 100%;">
                                 <option selected="selected">Alabama</option>
                                 <option>Alaska</option>
                                 <option>California</option>
@@ -137,8 +137,8 @@
                             </select>
                         </div>
                         <div class="form-group col">
-                            <label for="company_id">Motivo:</label>
-                            <select class="select2" style="width: 100%;">
+                            <label for="reason_id">Motivo:</label>
+                            <select id="reason_id" name="reason_id" class="select2" style="width: 100%;">
                                 <option selected="selected">Alabama</option>
                                 <option>Alaska</option>
                                 <option>California</option>
@@ -149,8 +149,8 @@
                             </select>
                         </div>
                         <div class="form-group col">
-                            <label for="company_id">Crachá</label>
-                            <select class="select2" style="width: 100%;">
+                            <label for="badge_id">Crachá</label>
+                            <select id="badge_id" name="badge_id" class="select2" style="width: 100%;">
                                 <option selected="selected">Alabama</option>
                                 <option>Alaska</option>
                                 <option>California</option>

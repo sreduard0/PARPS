@@ -35,7 +35,7 @@
 
             </div>
             <div class="card-body">
-                <table id="visitors" class="table table-bordered table-striped">
+                <table id="table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Rendering engine</th>

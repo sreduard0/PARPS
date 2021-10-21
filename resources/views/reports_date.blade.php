@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table id="rep_date" class="table table-bordered table-striped">
+                <table id="table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Rendering engine</th>
@@ -493,7 +493,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/date_filter_portuguese.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/list_portuguese.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
     <!-- InputMask -->
     <script src="{{ asset('plugins/inputmask/jquery.inputmask.min.js') }}"></script>

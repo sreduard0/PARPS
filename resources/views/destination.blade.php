@@ -20,7 +20,7 @@
                     destino</button>
             </div>
             <div class="card-body">
-                <table id="visitors" class="table table-bordered table-striped">
+                <table id="table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Rendering engine</th>
@@ -112,35 +112,11 @@
                                 <option>Washington</option>
                             </select>
                         </div>
-                        <div class="form-group col">
-                            <label for="company_id">Motivo:</label>
-                            <select class="select2" style="width: 100%;">
-                                <option selected="selected">Alabama</option>
-                                <option>Alaska</option>
-                                <option>California</option>
-                                <option>Delaware</option>
-                                <option>Tennessee</option>
-                                <option>Texas</option>
-                                <option>Washington</option>
-                            </select>
-                        </div>
-                        <div class="form-group col">
-                            <label for="company_id">Crachá</label>
-                            <select class="select2" style="width: 100%;">
-                                <option selected="selected">Alabama</option>
-                                <option>Alaska</option>
-                                <option>California</option>
-                                <option>Delaware</option>
-                                <option>Tennessee</option>
-                                <option>Texas</option>
-                                <option>Washington</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-success">Registrar</button>
+                    <button type="button" class="btn btn-success">Cadastrar</button>
                 </div>
             </div>
         </div>

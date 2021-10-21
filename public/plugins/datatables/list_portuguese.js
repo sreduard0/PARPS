@@ -1,5 +1,5 @@
 $(function () {
-    $("#visitors").DataTable({
+    $("#table").DataTable({
         "responsive": true,
         "lengthChange": true,
         "autoWidth": false,
@@ -171,6 +171,6 @@ $(function () {
 
         },
         "buttons": ["excel", "pdf", "print",]
-    }).buttons().container().appendTo('#visitors_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
 
 });

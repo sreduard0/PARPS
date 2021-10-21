@@ -167,7 +167,7 @@
 
                         {{-- /CONTEUDO --}}
                         <section class="col-lg-3">
-                            <div class="small-box bg-primary">
+                            <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>5</h3>
                                     <p>Visitantes na OM</p>

@@ -3,7 +3,7 @@
 @section('register_open', 'menu-open')
 @section('register', 'active')
 @section('enterprise', 'active')
-@section('title-header', 'Cadastro de empresas')
+@section('title-header', 'Empresas')
 @section('css')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -21,25 +21,23 @@
 
             </div>
             <div class="card-body">
-                <table id="visitors" class="table table-bordered table-striped">
+                <table id="table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
+                            <th>Nome</th>
+                            <th width="100">telefone</th>
+                            <th>Endereço</th>
+                            <th width="25">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Trident</td>
-                            <td>Internet
-                                Explorer 4.0
+                            <td>CAT</td>
+                            <td>(51) 3479-2000</td>
+                            <td>Av. Santa Rita, N° 555, Nova Santa Rita, RS</td>
+                            <td>
+                                <button class="btn btn-danger" title="Excluir empresa"><i class="fa fa-trash"></i></button>
                             </td>
-                            <td>Win 95+</td>
-                            <td> 4</td>
-                            <td>X</td>
                         </tr>
                     </tbody>
                 </table>
@@ -51,59 +49,11 @@
 @endsection
 @section('modal')
     <!-- Modal -->
-    {{-- <div class="row">
-                            <div class="form-group col-md-3">
-                                <label>Entrada</label>
-                                <div class="input-group date" id="born_at" data-target-input="nearest">
-                                    <input type="text" class="form-control" id="born_at" name="born_at" value="">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group col">
-                                <label for="company_id">Destino:</label>
-                                <select class="select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label for="company_id">Motivo:</label>
-                                <select class="select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label for="company_id">Crachá</label>
-                                <select class="select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                        </div> --}}
     <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="registerLabel">Nova entrada</h5>
+                    <h5 class="modal-title" id="registerLabel">Cadastrar empresa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -111,31 +61,48 @@
                 <div class="modal-body">
                     <form action="#">
                         <div class="row">
-                            ,
+
                             <div class="form-group col">
-                                <label>Visitante</label>
-                                <select class="select2" style="width: 100%;">
-                                    <option>Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
+                                <label>Empresa</label>
+                                <input type="text" class="form-control" name="enterprise" id="enterprise"
+                                    placeholder="Nome da empresa">
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="name">Fone:</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Digite seu nome completo" value="">
+
+                            <div class="col-md-3 form-group ">
+                                <label for="phone">Telefone</label>
+                                <input type="text" class="form-control" data-inputmask="'mask': ['(99) 9 9999-9999']"
+                                    inputmode="text" data-mask="" id="phone" name="phone" placeholder="Telefone" value="">
                             </div>
                         </div>
-
+                        <hr>
+                        <label class="fs-23">Endereço</label>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="street">Logradouro</label>
+                                <input type="text" class="form-control" id="street" name="street" placeholder="Logradouro"
+                                    value="">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="house_number">Nº</label>
+                                <input type="text" class="form-control" id="number" name="number" placeholder="Nº">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="district">Bairro</label>
+                                <input type="text" id="district" name="district" class="form-control"
+                                    placeholder="Bairro">
+                            </div>
+                            <div class="form-group col">
+                                <label for="city">Cidade</label>
+                                <input type="text" id="city" name="city" class="form-control" placeholder="Cidade">
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-success">Registrar</button>
+                    <button type="button" class="btn btn-success">Cadastrar</button>
                 </div>
             </div>
         </div>
@@ -167,7 +134,7 @@
             $('.select2').select2({
                 dropdownParent: $("#register")
             });
-
+            $('[data-mask]').inputmask()
         })
     </script>
 @endsection
