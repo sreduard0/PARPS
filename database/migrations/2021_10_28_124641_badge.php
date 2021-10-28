@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class Badge extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+      public function up()
     {
-        //
+        Schema::create('badge', function (Blueprint $table){
+            $table->id();
+            $table->integer('badge');
+            $table->string('color')->nullable();
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
-        //
+        Schema::dropIfExists('badge');
     }
 }

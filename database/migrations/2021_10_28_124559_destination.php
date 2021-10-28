@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class Destination extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
-        //
+        Schema::create('destination', function (Blueprint $table){
+            $table->id();
+            $table->string('destination');
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
-        //
+        Schema::dropIfExists('destination');
     }
 }

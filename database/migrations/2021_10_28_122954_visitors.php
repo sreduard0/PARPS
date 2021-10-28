@@ -16,6 +16,7 @@ class Visitors extends Migration
             $table->bigInteger('phone');
             $table->tinyInteger('cnh');
             $table->integer('enterprise');
+            $table->text('photo');
             $table->timestamps();
             $table->softDeletes();
         });

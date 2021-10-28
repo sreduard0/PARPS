@@ -6,23 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class Reason extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+
+      public function up()
     {
-        //
+        Schema::create('reason', function (Blueprint $table){
+            $table->id();
+            $table->string('reason');
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
-        //
+        Schema::dropIfExists('reason');
     }
+
 }
