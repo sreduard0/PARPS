@@ -24,6 +24,7 @@
                 <table id="table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th width="15">#</th>
                             <th>Nome</th>
                             <th width="100">telefone</th>
                             <th>Endereço</th>
@@ -32,6 +33,7 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>1</td>
                             <td>CAT</td>
                             <td>(51) 3479-2000</td>
                             <td>Av. Santa Rita, N° 555, Nova Santa Rita, RS</td>

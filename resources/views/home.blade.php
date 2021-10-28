@@ -25,10 +25,10 @@
                             <th>Visitante</th>
                             <th>Empresa</th>
                             <th>Destino</th>
-                            <th>Crachá</th>
+                            <th width="15px">Crachá</th>
                             <th>Registrado por</th>
                             <th>Entrada</th>
-                            <th>Ações</th>
+                            <th width="70px">Ações</th>
                         </tr>
                     </thead>
                     <tbody>

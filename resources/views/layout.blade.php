@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- jQuery -->
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     @yield('script')
 
     {{-- ====================================/ CSS/JS ===================================== --}}
@@ -38,10 +40,10 @@
 <body class=" @if (session('theme') == 1) dark-mode @endif dark-mode hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="AdminLTELogo" height="60" width="60">
+            <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="" height="60" width="60">
         </div>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="index3.html" class="brand-link">
+            <a class="brand-link">
                 <img src="{{ asset('img/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">PARPS</span>
@@ -52,7 +54,7 @@
                         <img src="{{ asset('img/logo.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="http://sistao.3bsup.eb.mil.br/profile/view" class="d-block">Alexander Pierce</a>
                     </div>
                 </div>
                 <nav class="mt-2">
@@ -232,8 +234,7 @@
     {{-- ==================================== PLUGINS ===================================== --}}
 
 
-    <!-- jQuery -->
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

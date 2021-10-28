@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 @endsection
+@section('script')
+    <script src="{{ asset('js/croppie.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}" />
+@endsection
 @section('content')
     <section class="col ">
         <div class="card">
@@ -23,6 +27,7 @@
                 <table id="table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th width="15">#</th>
                             <th>Nome</th>
                             <th>Empresa</th>
                             <th width="40">CNH</th>
@@ -31,6 +36,7 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>1</td>
                             <td>Jose Pinto</td>
                             <td>CAT</td>
                             <td>Não</td>
@@ -40,6 +46,7 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>2</td>
                             <td>Lula Innacio</td>
                             <td>CAT</td>
                             <td>Sim</td>
@@ -70,7 +77,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+
+                    <div class="card card-widget widget-user">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header text-white"
+                            style="background: url('{{ asset('img/bg-visitors.png') }}') center center;background-size:contain"
+                            id="img_bg">
+                            <div class="widget-user-image">
+                                <img id="img_profile" class="img-circle" src="{{ asset('img/people.png') }}"
+                                    alt="User Avatar">
+                                <div class="panel-body">
+                                    <label for="upload_image" class="btn btn-success edit-img-profile"><i
+                                            class="fa fa-pen"></i></label>
+                                    <input type="file" class="btn btn-success input-img-profile" name="upload_image"
+                                        id="upload_image" accept="image/png,image/jpg,image/jpeg" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="row">
+                        <input type="hidden" id="image_profile" name="image_profile" value="">
                         <div class="form-group col">
                             <label for="name">Nome completo</label>
                             <input id="name" name="name" type="text" class="form-control" placeholder="Nome do visitante">
@@ -115,8 +143,30 @@
             </div>
         </div>
     </div>
+
+
+
+    {{-- Modal de envio de imagem --}}
+    <div id="uploadimage" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ajustar imagem</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="image_demo"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button class="btn btn-success crop_image">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('js/crop-img-profile.js') }}"></script>
 @endsection
 @section('plugins')
+
     <!-- Select2 -->
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <!-- DataTables  & Plugins -->
