@@ -52,7 +52,6 @@
             </div>
             <!-- /.card-body -->
         </div>
-
     </section>
 @endsection
 @section('modal')
