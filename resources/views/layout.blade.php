@@ -90,21 +90,6 @@
                                         <p>Visitantes</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('destination') }}" class="nav-link @yield('destination')">
-                                        <i class="fa fa-map-marker-alt nav-icon"></i>
-                                        <p>Destinos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('reason') }}" class="nav-link @yield('reason')">
-                                        <i class="fa fa-list-ul nav-icon"></i>
-                                        <p>Motivos</p>
-                                    </a>
-                                </li>
-
-
-
                             </ul>
                         </li>
                         <li class="nav-item @yield('reports_open')">
@@ -136,6 +121,32 @@
                                         <p>Por data</p>
                                     </a>
                                 </li>
+
+                            </ul>
+                        </li>
+                         <li class="nav-item @yield('config_open')">
+                            <a href="#" class="nav-link @yield('config')">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Configurações
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('destination') }}" class="nav-link @yield('destination')">
+                                        <i class="fa fa-map-marker-alt nav-icon"></i>
+                                        <p>Destinos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('reason') }}" class="nav-link @yield('reason')">
+                                        <i class="fa fa-list-ul nav-icon"></i>
+                                        <p>Motivos</p>
+                                    </a>
+                                </li>
+
+
 
                             </ul>
                         </li>
