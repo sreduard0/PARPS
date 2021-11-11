@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\RecordsController;
 use Illuminate\Support\Facades\Route;
 
 
 // Route::middleware('auth')->group(function(){
-    Route::get('/', [ViewController::class, 'home'])->name('home');
+    Route::get('/', [RecordsController::class, 'records'])->name('home');
     Route::get('enterprise', [ViewController::class, 'enterprise'])->name('enterprise');
     Route::get('visitors', [ViewController::class, 'visitors'])->name('visitors');
     Route::get('reason', [ViewController::class, 'reason'])->name('reason');

@@ -15,7 +15,7 @@ class Visitors extends Migration
             $table->bigInteger('cpf');
             $table->bigInteger('phone');
             $table->tinyInteger('cnh');
-            $table->integer('enterprise');
+            $table->integer('enterprise_id');
             $table->text('photo');
             $table->timestamps();
             $table->softDeletes();

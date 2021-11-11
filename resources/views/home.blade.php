@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 @endsection
 @section('content')
+    @php
+    $i = 1;
+    @endphp
     <section class="col ">
         <div class="card">
             <div class="card-header">
@@ -32,37 +35,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Josnei da Silva Sauro - <i class="fa fa-steering-wheel"></i></td>
-                            <td>CAT</td>
-                            <td>Destino</td>
-                            <td>5</td>
-                            <td>Claudio</td>
-                            <td>10/10/21 10:10</td>
-                            <td>
-                                <button class="btn btn-primary" title="Ver perfil do visitante"><i
-                                        class="fa fa-user"></i></button>
-                                <button class="btn btn-success" title="Encerrar entrada"><i
-                                        class="fa fa-check"></i></button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td>Cleiton Cidnei</td>
-                            <td>CAT</td>
-                            <td>Destino</td>
-                            <td>6</td>
-                            <td>Claudio</td>
-                            <td>10/10/21 10:10</td>
-                            <td>
-                                <button class="btn btn-primary" title="Ver perfil do visitante"><i
-                                        class="fa fa-user"></i></button>
-                                <button class="btn btn-success" title="Encerrar entrada"><i
-                                        class="fa fa-check"></i></button>
-                            </td>
-                        </tr>
+                        @foreach ($records as $record)
+                            <tr>
+                                <td data-search="{{ $record->visitor->cpf }}">{{ $i++ }}</td>
+                                <td>{{ $record->visitor->name }}</td>
+                                <td>{{ $record->visitor->enterprise->name }}</td>
+                                <td>{{ $record->destination->destination }}</td>
+                                <td>{{ $record->badge }}</td>
+                                <td>{{ $record->registred_by }}</td>
+                                <td>{{ date('d/m/Y h:m', strtotime($record->date_entrance)) }}</td>
+                                <td>
+                                    <button class="btn btn-primary" title="Ver perfil do visitante"><i
+                                            class="fa fa-user"></i></button>
+                                    <button class="btn btn-success" title="Encerrar entrada"><i
+                                            class="fa fa-check"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -89,13 +78,11 @@
                         <div class="form-group col">
                             <label for="visitor_id">Visitante</label>
                             <select id="visitor_id" name="visitor_id" class="select2" style="width: 100%;">
-                                <option selected="selected">Alabama</option>
-                                <option>Alaska</option>
-                                <option>California</option>
-                                <option>Delaware</option>
-                                <option>Tennessee</option>
-                                <option>Texas</option>
-                                <option>Washington</option>
+                                <option disabled selected="selected">Selecione um visitante</option>
+                                @foreach ($visitors as $visitor)
+                                    <option title="{{ $visitor->cpf }}" value="{{ $visitor->title }}">
+                                        {{ $visitor->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-2">
@@ -190,15 +177,48 @@
     <script src="{{ asset('plugins/datatables/list_portuguese.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
     <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2({
-                dropdownParent: $("#register")
-            });
+        function matchCustom(params, data) {
 
-            $('[data-mask]').inputmask()
+            document.querySelector(".select2-search__field").placeholder = "Pesquise pelo nome ou cpf";
 
-        })
+            // Se não houver termos de pesquisa, retorne todos os dados
+            if ($.trim(params.term) === '') {
+
+                return data;
+            }
+            // `params.term` deve ser o termo usado para pesquisar
+            // `data.text` é o texto que é exibido para o objeto de dados
+            //pesquisa por cpf
+            if (data.title.indexOf(params.term) > -1) {
+                var modifiedData = $.extend({}, data, true)
+
+                // Você pode retornar objetos modificados a partir daqui
+                // Isso inclui combinar os `filhos` como você quiser em conjuntos de dados aninhados
+                return modifiedData;
+            }
+
+            //Pesquisa por nome
+            if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
+
+                console.log(data.text)
+                var modifiedData = $.extend({}, data, true);
+                modifiedData.text += ' (CPF:' + data.title + ')';
+
+                // Você pode retornar objetos modificados a partir daqui
+                // Isso inclui combinar os `filhos` como você quiser em conjuntos de dados aninhados
+                return modifiedData;
+            }
+            // // Retorna `nulo` se o termo não deve ser exibido
+            return null;
+        }
+
+        //Initialize Select2 Elements
+        $('.select2').select2({
+            dropdownParent: $("#register"),
+            matcher: matchCustom,
+        });
+
+        $('[data-mask]').inputmask();
     </script>
     <!-- InputMask -->
     <script src="{{ asset('plugins/inputmask/jquery.inputmask.min.js') }}"></script>

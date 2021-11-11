@@ -1,3 +1,7 @@
+@php
+use App\Classes\Tools;
+$tools = new Tools();
+@endphp
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -71,9 +75,9 @@
 
                         <li class="nav-item @yield('register_open')">
                             <a href="#" class="nav-link @yield('register')">
-                                <i class="nav-icon fas fa-copy"></i>
+                                <i class="nav-icon fas fa-id-card"></i>
                                 <p>
-                                    Cadastrar
+                                    Cadastros
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -124,9 +128,9 @@
 
                             </ul>
                         </li>
-                         <li class="nav-item @yield('config_open')">
+                        <li class="nav-item @yield('config_open')">
                             <a href="#" class="nav-link @yield('config')">
-                                <i class="nav-icon fas fa-copy"></i>
+                                <i class="nav-icon fas fa-cog"></i>
                                 <p>
                                     Configurações
                                     <i class="fas fa-angle-left right"></i>
@@ -182,7 +186,7 @@
                         <section class="col-lg-3">
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>5</h3>
+                                    <h3>{{ count($tools->visitors_on_here()) }}</h3>
                                     <p>Visitantes na OM</p>
                                 </div>
                                 <div class="icon">
@@ -192,8 +196,7 @@
                             </div>
                             <div class="small-box bg-primary">
                                 <div class="inner">
-                                    <h3>53</sup></h3>
-
+                                    <h3>{{ count($tools->visitors_day()) }}</h3>
                                     <p>Visitantes no dia</p>
                                 </div>
                                 <div class="icon">

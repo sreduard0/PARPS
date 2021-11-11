@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 class ViewController extends Controller
 {
 //============================[LISTA]==============================//
-    function home()
-    {
-        return view('home');
-    }
-
     function enterprise()
     {
 
