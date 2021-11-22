@@ -12,6 +12,7 @@ class Destination extends Migration
         Schema::create('destination', function (Blueprint $table){
             $table->id();
             $table->string('destination');
+            $table->string('color');
         });
     }
 

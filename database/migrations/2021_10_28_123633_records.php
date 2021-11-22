@@ -17,10 +17,11 @@ class Records extends Migration
             $table->integer('destination_id');
             $table->integer('reason_id');
             $table->integer('badge');
-            $table->datetime('date_entrance');
+            $table->timestamps('date_entrance');
             $table->string('registred_by');
-            $table->datetime('date_exit');
+            $table->timestamps('date_exit');
             $table->string('finished_by');
+            $table->integer('status');
             $table->timestamps();
             $table->softDeletes();
 

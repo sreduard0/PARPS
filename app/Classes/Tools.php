@@ -8,11 +8,11 @@ class Tools
     //=================================== Visitantes do dia =======================================
     function visitors_day()
     {
-        return RecordsModel::where('date_entrance', date('Y-m-d h:m'))->get();
+        return RecordsModel::where('date_entrance', 'LIKE', date('Y-m-d') .'%')->get();
     }
     //=================================== Visitantes na OM ========================================
     function visitors_on_here()
     {
-        return RecordsModel::all();
+        return RecordsModel::where('status', 1)->get();
     }
 }

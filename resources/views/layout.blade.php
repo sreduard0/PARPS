@@ -1,13 +1,10 @@
-@php
-use App\Classes\Tools;
-$tools = new Tools();
-@endphp
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @yield('meta')
     <title> PARPS - @yield('title')</title>
     {{-- ==================================== CSS/JS ===================================== --}}
 
@@ -25,7 +22,9 @@ $tools = new Tools();
     {{-- CSS ESPECIFICO --}}
     @yield('css')
     {{-- CSS ESPECIFICO --}}
-
+    {{-- sweetalert2 --}}
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ asset('css/util.css') }}">
@@ -186,7 +185,7 @@ $tools = new Tools();
                         <section class="col-lg-3">
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>{{ count($tools->visitors_on_here()) }}</h3>
+                                    <h3 id="here">0</h3>
                                     <p>Visitantes na OM</p>
                                 </div>
                                 <div class="icon">
@@ -196,7 +195,7 @@ $tools = new Tools();
                             </div>
                             <div class="small-box bg-primary">
                                 <div class="inner">
-                                    <h3>{{ count($tools->visitors_day()) }}</h3>
+                                    <h3 id="today">0</h3>
                                     <p>Visitantes no dia</p>
                                 </div>
                                 <div class="icon">
@@ -262,12 +261,24 @@ $tools = new Tools();
     <script src="{{ asset('plugins/inputmask/jquery.inputmask.min.js') }}"></script>
     <script src="{{ asset('plugins/moment/locales.js') }}"></script>
     <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.j') }}s"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.js') }}"></script>
     <!-- date-range-picker -->
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script>
+        setInterval(function() {
+            var url = location + 'get_records_history';
+            $.get(url, function(result) {
+                document.getElementById('today').innerText = result.today;
+                document.getElementById('here').innerText = result.here;
+            })
+        }, 5000);
+    </script>
     @yield('plugins')
     {{-- ====================================/ PLUGINS ===================================== --}}
 </body>

@@ -1,8 +1,8 @@
 {
-    "emptyTable": "Não foi encontrado nenhum registo",
-    "loadingRecords": "A carregar...",
-    "processing": "A processar...",
-    "lengthMenu": "Mostrar _MENU_ aplicativos",
+    "emptyTable": "Não foi encontrado nenhum registro",
+    "loadingRecords": "Carregando...",
+    "processing": "Processando...",
+    "lengthMenu": "Mostrar _MENU_ registros",
     "zeroRecords": "Não foram encontrados resultados",
     "search": "Procurar:",
     "paginate": {
@@ -118,18 +118,18 @@
         "title": "Filtros ativos"
     },
     "select": {
-        "1": "%d linha seleccionada",
-        "_": "%d linhas seleccionadas",
+        "1": "%d linha selecionada",
+        "_": "%d linhas selecionadas",
         "cells": {
-            "1": "1 célula seleccionada",
-            "_": "%d células seleccionadas"
+            "1": "1 célula selecionada",
+            "_": "%d células selecionadas"
         },
         "columns": {
-            "1": "1 coluna seleccionada",
-            "_": "%d colunas seleccionadas"
+            "1": "1 coluna selecionada",
+            "_": "%d colunas selecionadas"
         },
         "rows": {
-            "1": "%d linha seleccionada"
+            "1": "%d linha selecionada"
         }
     },
     "thousands": ".",
@@ -159,6 +159,6 @@
             "restore": "Desfazer alterações"
         }
     },
-    "info": "Aplicativos de _START_ a _END_, N° total de aplicativos _TOTAL_",
-    "infoEmpty": "Não há apps cadastrados."
+    "info": "Registros de _START_ a _END_, N° total de registros _TOTAL_",
+    "infoEmpty": "Não há registros."
 }
