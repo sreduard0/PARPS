@@ -272,7 +272,7 @@
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script>
         setInterval(function() {
-            var url = location + 'get_records_history';
+            var url = '/get_records_history';
             $.get(url, function(result) {
                 document.getElementById('today').innerText = result.today;
                 document.getElementById('here').innerText = result.here;

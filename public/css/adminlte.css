@@ -32378,7 +32378,7 @@ html.maximized-card {
 }
 
 .dark-mode .modal-content {
-    background-color: #343a40;
+    background-color: #33383e;
 }
 
 .dark-mode .modal-content.bg-warning .modal-header,
@@ -36070,7 +36070,7 @@ a.disabled.mailbox-attachment-close {
 }
 
 .widget-user .card-footer {
-    padding-top: 50px;
+    padding-top: 0px;
 }
 
 .widget-user-2 .widget-user-header {

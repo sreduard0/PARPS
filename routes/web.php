@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\RecordsController;
+use App\Http\Controllers\VisitorsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,9 +16,9 @@ use Illuminate\Support\Facades\Route;
     Route::post('get_records',[RecordsController::class, 'get_records'])->name('get_records');
     //End Records
 
-
-
-
+    //Visitors
+        Route::get('get_profile/{id}',[VisitorsController::class, 'get_profile'])->name('get_profile');
+    //End Visitors
 
     Route::get('enterprise', [ViewController::class, 'enterprise'])->name('enterprise');
     Route::get('visitors', [ViewController::class, 'visitors'])->name('visitors');

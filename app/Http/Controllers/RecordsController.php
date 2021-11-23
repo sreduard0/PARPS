@@ -109,8 +109,8 @@ class RecordsController extends Controller
             $dado[] = $record->registred_by;
             $dado[] =  date('d/m/Y  H:m', strtotime($record->date_entrance));
             $dado[] = "
-                <button class='btn btn-primary' title='Ver perfil do visitante'  data-toggle='modal' data-target='#edit_app'
-                         data-id=''><i class='fa fa-user'></i></button>
+                <button class='btn btn-primary' title='Ver perfil do visitante'  data-toggle='modal' data-target='#visitor_profile'
+                         data-id='".$record->visitor->id."'><i class='fa fa-user'></i></button>
                 <button class='btn btn-success' title='Encerrar entrada' onclick='return confirm_exit(".$record->id.")'><i class='fa fa-check'></i></button>
             ";
             $dados[] = $dado;
