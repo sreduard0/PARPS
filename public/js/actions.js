@@ -135,6 +135,56 @@ function confirm_exit(id) {
     });
 }
 
+//================================[DELETAR EMPRESA]================================//
+function confirm_delete(id) {
+       var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+    });
+
+    bootbox.confirm({
+        title: ' Deseja excluir essa empresa?',
+        message: '<strong>Essa operação não pode ser desfeita!</strong>',
+        callback: function(confirmacao) {
+
+            if (confirmacao)
+            $.ajax({
+                url:  "/enterprise/delete/"+id,
+                type: "GET",
+                success: function(data) {
+                   $("#table").DataTable().clear().draw(6);
+                    Toast.fire({
+                        icon: 'success',
+                        title: '&nbsp&nbsp Empresa excluida.'
+                    });
+
+                },
+                 error: function(data) {
+                    Toast.fire({
+                        icon: 'error',
+                        title: '&nbsp&nbsp Erro excluir.'
+                    });
+
+                }
+            });
+        },
+        buttons: {
+            cancel: {
+                label: 'Cancelar',
+                className: 'btn-default'
+            },
+            confirm: {
+                label: 'Excluir',
+                className: 'btn-danger'
+            }
+
+        }
+    });
+}
+
+
 
 
 

@@ -4,6 +4,9 @@
 @section('register', 'active')
 @section('enterprise', 'active')
 @section('title-header', 'Empresas')
+@section('script')
+    <script src="{{ asset('js/bootbox.min.js') }}"></script>
+@endsection
 @section('css')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -31,17 +34,6 @@
                             <th width="25">Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>CAT</td>
-                            <td>(51) 3479-2000</td>
-                            <td>Av. Santa Rita, N° 555, Nova Santa Rita, RS</td>
-                            <td>
-                                <button class="btn btn-danger" title="Excluir empresa"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
@@ -128,7 +120,30 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/list_portuguese.js') }}"></script>
+    <script>
+        $(function() {
+            $("#table").DataTable({
+                "paging": true,
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "language": {
+                    "url": "{{ asset('plugins/datatables/Portuguese3.json') }}"
+                },
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "{{ route('get_enterprises') }}",
+                    "type": "POST",
+                    "headers": {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                    },
+
+                }
+            });
+        });
+    </script>
+    {{-- <script src="{{ asset('plugins/datatables/list_portuguese.js') }}"></script> --}}
     <script src="{{ asset('js/calendar.js') }}"></script>
     <script>
         $(function() {
@@ -139,4 +154,5 @@
             $('[data-mask]').inputmask()
         })
     </script>
+    <script src="{{ asset('js/actions.js') }}"></script>
 @endsection

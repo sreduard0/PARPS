@@ -1,10 +1,10 @@
 {
-    "emptyTable": "Não há solicitações no momento.",
+    "emptyTable": "Não há empresas no momento.",
     "loadingRecords": "A carregar...",
     "processing": "A processar...",
-    "lengthMenu": "Mostrar _MENU_ solicitações",
+    "lengthMenu": "Mostrar _MENU_ empresas",
     "zeroRecords": "Não foram encontrados resultados",
-    "search": "Procurar por IDT militar:",
+    "search": "Procurar por nome:",
     "paginate": {
         "first": "Primeiro",
         "previous": "Anterior",
@@ -159,6 +159,6 @@
             "restore": "Desfazer alterações"
         }
     },
-    "info": "Solicitaçõesvos de _START_ a _END_, N° total de solicitações _TOTAL_",
-    "infoEmpty": "Não há solicitações."
+    "info": "Empresas de _START_ a _END_, N° total de empresas _TOTAL_",
+    "infoEmpty": "Não há empresas."
 }

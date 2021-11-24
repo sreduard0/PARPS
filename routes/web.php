@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\RecordsController;
 use App\Http\Controllers\VisitorsController;
@@ -20,7 +21,15 @@ use Illuminate\Support\Facades\Route;
         Route::get('get_profile/{id}',[VisitorsController::class, 'get_profile'])->name('get_profile');
     //End Visitors
 
-    Route::get('enterprise', [ViewController::class, 'enterprise'])->name('enterprise');
+    //Enterprise
+        Route::get('enterprise', [EnterpriseController::class, 'enterprise'])->name('enterprise');
+        Route::get('/enterprise/delete/{id}', [EnterpriseController::class, 'delete_enterprise'])->name('delete_enterprise');
+
+    //POSTS
+        Route::post('get_enterprises',[EnterpriseController::class, 'get_enterprises'])->name('get_enterprises');
+    //End Enterprise
+
+
     Route::get('visitors', [ViewController::class, 'visitors'])->name('visitors');
     Route::get('reason', [ViewController::class, 'reason'])->name('reason');
     Route::get('destination', [ViewController::class, 'destination'])->name('destination');
