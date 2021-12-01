@@ -20,6 +20,47 @@ class EnterpriseController extends Controller
         EnterpriseModel::find($id)->delete();
     }
 
+    //================================={ ADD EMPRESA }====================================//
+    public function add_enterprise(Request $request)
+    {
+        $data = $request->all();
+
+        $checkExists = EnterpriseModel::orWhere('name', 'LIKE', '%'.$data['enterprise'].'%')->first();
+
+        if($checkExists)
+        {
+            return 'error';
+        }else
+        {
+            $enterprise = new EnterpriseModel;
+            $enterprise->name = $data['enterprise'];
+            $enterprise->phone =  str_replace(['(',')', '-',' '], '', $data['phone']);
+            $enterprise->address = $data['street'].", N° ".$data['number'].", Bairro ".$data['district'].", ".$data['city'];
+            $enterprise->save();
+
+        }
+
+    }
+
+    //================================={ Excluir empresa }====================================//
+    public function info_enterprise($id)
+    {
+        return EnterpriseModel::find($id);
+    }
+
+    //================================={ RETORNA JSON DE EMPRESAS }====================================//
+    public function enterprises_json()
+    {
+        $enterprises = EnterpriseModel::all();
+        foreach ($enterprises as $enterprise){
+           $data = array();
+            $data['value'] = $enterprise->id;
+            $data['text'] = $enterprise->name;
+            $json[] = $data;
+        }
+        return $json;
+    }
+
     //================================={ DataTables }====================================//
     public function get_enterprises(Request $request)
     {
@@ -60,7 +101,10 @@ class EnterpriseController extends Controller
             $dado[] = $enterprise->name;
             $dado[] = $enterprise->phone;
             $dado[] = $enterprise->address;
-            $dado[] = "<button class='btn btn-danger' title='Excluir empresa' onclick='return confirm_delete(".$enterprise->id.")'><i class='fa fa-trash'></i></button>";
+            $dado[] = "
+            <button class='btn btn-primary'  data-toggle='modal' data-target='#enterprise_edit' data-id='".$enterprise->id."'><i class='fa fa-building '></i></button>
+            <button class='btn btn-danger' title='Excluir empresa' onclick='return confirm_delete(".$enterprise->id.")'><i class='fa fa-trash'></i></button>
+            ";
             $dados[] = $dado;
         }
 

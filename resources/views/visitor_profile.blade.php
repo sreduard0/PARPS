@@ -1,3 +1,10 @@
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+@section('script')
+    <script src="{{ asset('js/croppie.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}" />
+@endsection
 {{-- Perfil usuario --}}
 <div class="modal fade" id="visitor_profile" tabindex="-1" role="dialog" aria-labelledby="visitor_profile"
     aria-hidden="true">
@@ -20,7 +27,14 @@
                                 style="background: url('{{ asset('img/bg-visitors.png') }}') center center;background-size:100%">
                             </div>
                             <div class="widget-user-image">
-                                <img id="img_profile" class="img-circle" src="{{ asset('img/people.png') }}">
+                                <img id="edit_img" class="img-circle" src="{{ asset('img/people.png') }}"
+                                    alt="User Avatar">
+                                <div class="panel-body">
+                                    <label for="upload_new_image" class="btn btn-success edit-img-profile"><i
+                                            class="fa fa-pen"></i></label>
+                                    <input type="file" class="btn btn-success input-img-profile" name="upload_new_image"
+                                        id="upload_new_image" accept="image/png,image/jpg,image/jpeg" />
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <div class="description-block">
@@ -45,6 +59,8 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="card-body">
+                                                <input type="hidden" id="id" value="">
+                                                <input type="hidden" id="enterprise_id" value="">
                                                 <div class="  float-l col-md-6">
                                                     <strong> Nome completo</strong>
 
@@ -66,7 +82,7 @@
 
                                                     <strong>Contato</strong>
 
-                                                    <p id="phone" class="text-muted"></p>
+                                                    <p id="phone_visitor" class="text-muted"></p>
 
                                                 </div>
                                             </div>
@@ -77,6 +93,8 @@
                                             <h3 class="card-title card-title-background "> <i
                                                     class="fas fa-user mr-1"></i>
                                                 Empresa</h3>
+                                            <button class="btn c-w float-r" onclick="return edit_enterprise()"><i
+                                                    class="fa fa-pen"></i></button>
                                         </div>
                                         <div class="card-body">
                                             <div class="card-body">
@@ -86,7 +104,7 @@
 
                                                     <p id="enterprise" class="text-muted"></p>
                                                     <hr>
-                                                    <strong>Endereço</strong>
+                                                    <strong>Contato</strong>
 
                                                     <p id="enterprise_phone" class="text-muted"></p>
 
@@ -114,22 +132,47 @@
         </div>
     </div>
 </div>
+
+{{-- Modal de envio de imagem --}}
+<div id="uploanewdimage" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ajustar imagem</h4>
+            </div>
+            <div class="modal-body">
+                <div id="image_prev"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button class="btn btn-success crop_new_image">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- SCRIPTS --}}
 <script>
     $('#visitor_profile').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         var id = button.data('id');
+        if (id == undefined) {
+            id = $('#id').val();
+        }
+
         var modal = $(this);
-        var url = location + 'get_profile/' + id;
+        var url = '/get_profile/' + id;
         $.get(url, function(result) {
-            modal.find('#img_profile').attr("src", result.photo)
+            modal.find('#edit_img').attr("src", result.photo)
             modal.find('#visitor_name').text(result.name)
             modal.find('#enterprise_name').text(result.enterprise.name)
             modal.find('#fullname').text(result.name)
             modal.find('#cpf').text(result.cpf)
-            modal.find('#phone').text(result.phone)
+            modal.find('#phone_visitor').text(result.phone)
             modal.find('#enterprise_address').text(result.enterprise.address)
             modal.find('#enterprise_phone').text(result.enterprise.phone)
             modal.find('#enterprise').text(result.enterprise.name)
+            document.getElementById("id").value = id
+            document.getElementById("enterprise_id").value = result.enterprise.id
             if (result.cnh == 1) {
                 modal.find('#cnh').text('Este motorista tem CNH')
             } else {
@@ -138,3 +181,72 @@
         })
     });
 </script>
+
+<script>
+    function edit_enterprise() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000
+        });
+
+        var url = '/enterprises_json';
+        var enterprise_id = $('#enterprise_id').val();
+        $('#visitor_profile').modal('hide');
+        $.get(url, function(result) {
+            bootbox.prompt({
+                title: "Selecione a empresa.",
+                inputType: 'select',
+                centerVertical: true,
+                value: enterprise_id,
+                buttons: {
+                    confirm: {
+                        label: 'Editar',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'cancelar',
+                        className: 'btn-secondary'
+                    }
+                },
+                inputOptions: result,
+                callback: function(result) {
+                    if (result) {
+                        var data = {
+                            id: $('#id').val(),
+                            enterprise_id: result
+                        };
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: '/edit_enterprise_visitor',
+                            type: 'POST',
+                            data: data,
+                            dataType: 'text',
+                            success: function(data) {
+                                $("#table").DataTable().clear().draw(6);
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: '&nbsp&nbsp Empresa alterad com sucesso.'
+                                });
+                                $('#visitor_profile').modal('show');
+                            },
+
+                            error: function(data) {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: '&nbsp&nbsp Erro ao alterar.'
+                                });
+                            }
+                        });
+                    }
+
+                }
+            });
+
+        })
+    }
+</script>
+<script src="{{ asset('js/crop-img-profile.js') }}"></script>

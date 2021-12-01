@@ -9,7 +9,7 @@ class RecordsModel extends Model
 {
     public function visitor()
     {
-        return $this->hasOne('App\Models\VisitorsModel', 'id', 'visitor_id')->with('enterprise');
+        return $this->hasOne('App\Models\VisitorsModel', 'id', 'visitor_id')->withTrashed()->with('enterprise');
     }
 
     public function destination()

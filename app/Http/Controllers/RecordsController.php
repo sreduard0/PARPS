@@ -46,14 +46,18 @@ class RecordsController extends Controller
 
             $record->visitor_id = $data['visitor_id'];
             $record->drive = $data['drive'];
-            $record->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
             $record->destination_id = $data['destination_id'];
+            $record->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
             $record->reason_id = $data['reason_id'];
             $record->badge = $data['badge'];
+            $record->enterprise_id = $visitor->enterprise_id;
             $record->date_entrance = date('Y-m-d H:m:s');
             $record->registred_by = 'teste';
             $record->status = 1;
             $record->save();
+
+            $visitor->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
+            $visitor->save();
 
         }
     }

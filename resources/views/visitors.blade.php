@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 @endsection
-@section('script')
-    <script src="{{ asset('js/croppie.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}" />
-@endsection
 @section('content')
     <section class="col ">
         <div class="card">
@@ -29,33 +25,11 @@
                         <tr>
                             <th width="15">#</th>
                             <th>Nome</th>
-                            <th>Empresa</th>
+                            <th>Contato</th>
                             <th width="40">CNH</th>
-                            <th width="20">Ações</th>
+                            <th width="70">Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Jose Pinto</td>
-                            <td>CAT</td>
-                            <td>Não</td>
-                            <td>
-                                <button class="btn btn-primary" title="Ver perfil do visitante"><i
-                                        class="fa fa-user"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Lula Innacio</td>
-                            <td>CAT</td>
-                            <td>Sim</td>
-                            <td>
-                                <button class="btn btn-primary" title="Ver perfil do visitante"><i
-                                        class="fa fa-user"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
@@ -66,8 +40,7 @@
 @section('modal')
 
     <!-- Modal -->
-    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,54 +70,53 @@
                         </div>
 
                     </div>
-                    <div class="row">
-                        <input type="hidden" id="image_profile" name="image_profile" value="">
-                        <div class="form-group col">
-                            <label for="name">Nome completo</label>
-                            <input id="name" name="name" type="text" class="form-control" placeholder="Nome do visitante">
+                    <form id="form-visitor">
+                        <div class="row">
+                            <input type="hidden" id="image_profile" name="image_profile" value="">
+                            <div class="form-group col">
+                                <label for="name_visitor">Nome completo</label>
+                                <input id="name_visitor" name="name_visitor" type="text" class="form-control"
+                                    placeholder="Nome do visitante">
+                            </div>
+                            <div class="col-md-3 form-group ">
+                                <label for="cpf">CPF</label>
+                                <input type="text" class="form-control" data-inputmask="'mask': ['999.999.999-99']"
+                                    inputmode="text" data-mask="" id="cpf" name="cpf" placeholder="Telefone" value="">
+                            </div>
                         </div>
-                        <div class="col-md-3 form-group ">
-                            <label for="cpf">CPF</label>
-                            <input type="text" class="form-control" data-inputmask="'mask': ['999.999.999-99']"
-                                inputmode="text" data-mask="" id="cpf" name="cpf" placeholder="Telefone" value="">
+                        <div class="row">
+                            <div class="col-md-3 form-group ">
+                                <label for="phone">Telefone</label>
+                                <input type="text" class="form-control" data-inputmask="'mask': ['(99) 9 9999-9999']"
+                                    inputmode="text" data-mask="" id="phone" name="phone" placeholder="Telefone" value="">
+                            </div>
+                            <div class="form-group col">
+                                <label for="cnh">CNH</label>
+                                <select id="cnh" name="cnh" class="form-control" style="width: 100%;">
+                                    <option value="0" selected="selected">Não</option>
+                                    <option value="1">Sim</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label for="enterprise_id">Empresa:</label>
+                                <select id="enterprise_id" name="enterprise_id" class="select2" style="width: 100%;">
+                                    <option disabled selected="selected">Selecione uma empresa</option>
+                                    @foreach ($enterprises as $enterprise)
+                                        <option value="{{ $enterprise->id }}">{{ $enterprise->name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 form-group ">
-                            <label for="phone">Telefone</label>
-                            <input type="text" class="form-control" data-inputmask="'mask': ['(99) 9 9999-9999']"
-                                inputmode="text" data-mask="" id="phone" name="phone" placeholder="Telefone" value="">
-                        </div>
-                        <div class="form-group col">
-                            <label for="cnh">CNH</label>
-                            <select id="cnh" name="cnh" class="form-control" style="width: 100%;">
-                                <option value="0" selected="selected">Não</option>
-                                <option value="1">Sim</option>
-                            </select>
-                        </div>
-                        <div class="form-group col">
-                            <label for="enterprise_id">Empresa:</label>
-                            <select id="enterprise_id" name="enterprise_id" class="select2" style="width: 100%;">
-                                <option selected="selected">Alabama</option>
-                                <option>Alaska</option>
-                                <option>California</option>
-                                <option>Delaware</option>
-                                <option>Tennessee</option>
-                                <option>Texas</option>
-                                <option>Washington</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
+                </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-success">Cadastrar</button>
+                    <button type="button" class="btn btn-success" onclick="return add_visitor()">Cadastrar</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 
     {{-- Modal de envio de imagem --}}
     <div id="uploadimage" class="modal" role="dialog">
@@ -163,7 +135,8 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/crop-img-profile.js') }}"></script>
+
+    @include('visitor_profile')
 @endsection
 @section('plugins')
 
@@ -183,8 +156,33 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/list_portuguese.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
+    <script src="{{ asset('js/actions.js') }}"></script>
+
+
+    <script>
+        $(function() {
+            $("#table").DataTable({
+                "paging": true,
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "language": {
+                    "url": "{{ asset('plugins/datatables/Portuguese3.json') }}"
+                },
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "{{ route('get_visitors') }}",
+                    "type": "POST",
+                    "headers": {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                    },
+
+                }
+            });
+        });
+    </script>
     <script>
         $(function() {
             //Initialize Select2 Elements

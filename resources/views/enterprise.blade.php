@@ -4,6 +4,9 @@
 @section('register', 'active')
 @section('enterprise', 'active')
 @section('title-header', 'Empresas')
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('script')
     <script src="{{ asset('js/bootbox.min.js') }}"></script>
 @endsection
@@ -29,9 +32,9 @@
                         <tr>
                             <th width="15">#</th>
                             <th>Nome</th>
-                            <th width="100">telefone</th>
+                            <th width="100">Contato</th>
                             <th>Endereço</th>
-                            <th width="25">Ações</th>
+                            <th width="80">Ações</th>
                         </tr>
                     </thead>
                 </table>
@@ -53,7 +56,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#">
+                    <form id="form-enterprise">
                         <div class="row">
 
                             <div class="form-group col">
@@ -96,13 +99,52 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-success">Cadastrar</button>
+                    <button type="button" class="btn btn-success" onclick="return add_enterprise()">Cadastrar</button>
                 </div>
             </div>
         </div>
     </div>
 
-@endsection
+
+
+    {{-- Editar Empresa --}}
+    <div class="modal fade" id="enterprise_edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enterprise_editLabel">Editar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" id="id" name="id" value="">
+                        <div class="form-group col">
+                            <label for="newName">Nome *</label>
+                            <input type="text" class="form-control" id="newName" name="newName" value="">
+                        </div>
+                        <div class="form-group col">
+                            <label for="newPhone">Contato</label>
+                            <input type="text" class="form-control" id="newPhone" name="newPhone" value="">
+                        </div>
+                        <div class="form-group col">
+                            <label for="newAddress">Endereço</label>
+                            <input type="text" class="form-control" id="newAddress" name="newAddress" value="">
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button onclick="return edit_app()" class="btn btn-success">Atualizar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 @section('plugins')
     <!-- Select2 -->
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
@@ -120,6 +162,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('js/actions.js') }}"></script>
     <script>
         $(function() {
             $("#table").DataTable({
@@ -143,7 +186,6 @@
             });
         });
     </script>
-    {{-- <script src="{{ asset('plugins/datatables/list_portuguese.js') }}"></script> --}}
     <script src="{{ asset('js/calendar.js') }}"></script>
     <script>
         $(function() {
@@ -154,5 +196,19 @@
             $('[data-mask]').inputmask()
         })
     </script>
-    <script src="{{ asset('js/actions.js') }}"></script>
+    <script>
+        $('#enterprise_edit').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+
+            var modal = $(this);
+            var url = '/enterprise/info/' + id;
+            $.get(url, function(result) {
+                modal.find('.modal-title').text('Editar ' + result.name)
+                modal.find('#newName').val(result.name)
+                modal.find('#newPhone').val(result.phone)
+                modal.find('#newAddress').val(result.address)
+            })
+        });
+    </script>
 @endsection

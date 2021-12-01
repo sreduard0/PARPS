@@ -5,9 +5,6 @@
 @section('meta')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
-@section('script')
-    <script src="{{ asset('js/bootbox.min.js') }}"></script>
-@endsection
 @section('css')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -50,8 +47,6 @@
     </section>
 @endsection
 @section('modal')
-    @include('visitor_profile')
-
     <!-- Modal  registro de visitante-->
     <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -138,6 +133,8 @@
             </div>
         </div>
     </div>
+
+    @include('visitor_profile')
 @endsection
 @section('plugins')
     <!-- Select2 -->
