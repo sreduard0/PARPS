@@ -93,7 +93,7 @@
                                             <h3 class="card-title card-title-background "> <i
                                                     class="fas fa-user mr-1"></i>
                                                 Empresa</h3>
-                                            <button class="btn c-w float-r" onclick="return edit_enterprise()"><i
+                                            <button class="btn c-w float-r" onclick="return editenterprise()"><i
                                                     class="fa fa-pen"></i></button>
                                         </div>
                                         <div class="card-body">
@@ -183,7 +183,7 @@
 </script>
 
 <script>
-    function edit_enterprise() {
+    function editenterprise() {
         var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',

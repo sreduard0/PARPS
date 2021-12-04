@@ -42,6 +42,27 @@ class EnterpriseController extends Controller
 
     }
 
+     //================================={ ADD EMPRESA }====================================//
+    public function edit_enterprise(Request $request)
+    {
+        $data = $request->all();
+        $checkExists = EnterpriseModel::where('name', $data['new_name'])->first();
+
+        if(empty($checkExists) || $checkExists->id == $data['id'] )
+        {
+            $enterprise = EnterpriseModel::find($data['id']);
+            $enterprise->name = $data['new_name'];
+            $enterprise->phone =  str_replace(['(',')', '-',' '], '', $data['new_phone']);
+            $enterprise->address = $data['new_address'];
+            $enterprise->save();
+        }
+        else{
+        return 'error';
+        }
+
+
+    }
+
     //================================={ Excluir empresa }====================================//
     public function info_enterprise($id)
     {
@@ -102,7 +123,7 @@ class EnterpriseController extends Controller
             $dado[] = $enterprise->phone;
             $dado[] = $enterprise->address;
             $dado[] = "
-            <button class='btn btn-primary'  data-toggle='modal' data-target='#enterprise_edit' data-id='".$enterprise->id."'><i class='fa fa-building '></i></button>
+            <button class='btn btn-primary'  data-toggle='modal' data-target='#enterprise_edit' data-id='".$enterprise->id."'><i class='fa fa-pen '></i></button>
             <button class='btn btn-danger' title='Excluir empresa' onclick='return confirm_delete(".$enterprise->id.")'><i class='fa fa-trash'></i></button>
             ";
             $dados[] = $dado;

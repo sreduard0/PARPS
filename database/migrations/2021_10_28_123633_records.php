@@ -15,7 +15,7 @@ class Records extends Migration
             $table->integer('drive');
             $table->bigInteger('phone');
             $table->integer('destination_id');
-            $table->integer('reason_id');
+            $table->string('reason');
             $table->integer('badge');
             $table->integer('enterprise_id');
             $table->timestamps('date_entrance');

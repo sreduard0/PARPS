@@ -433,7 +433,7 @@ function edit_enterprise() {
         return false;
     }
 
-    if (data.phone.replace(/\D+/g, "").length < 11)
+    if (data.new_phone.replace(/\D+/g, "").length < 11)
     {
         Toast.fire({
             icon: 'error',
@@ -444,6 +444,7 @@ function edit_enterprise() {
 
 
 
+
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         url: '/enterprise/edit',
@@ -451,6 +452,14 @@ function edit_enterprise() {
         data: data,
         dataType: 'text',
         success: function (data) {
+            if (data == "error") {
+
+                Toast.fire({
+                icon: 'error',
+                title: '&nbsp&nbsp Uma empresa com este nome já está cadastrada.'
+             });
+            } else {
+
                 $("#enterprise_edit").modal('hide');
                 $("#table").DataTable().clear().draw(6);
                 Toast.fire({
@@ -459,6 +468,8 @@ function edit_enterprise() {
                 });
 
                 $('#form-enterprise')[0].reset();
+
+            }
         },
 
         error: function (data) {

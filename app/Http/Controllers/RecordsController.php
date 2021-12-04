@@ -8,7 +8,6 @@ use App\Models\VisitorsModel;
 use Illuminate\Http\Request;
 use App\Classes\Tools;
 use App\Models\DestinationModel;
-use App\Models\ReasonModel;
 
 class RecordsController extends Controller
 {
@@ -22,7 +21,6 @@ class RecordsController extends Controller
     {
         $data = [
             'visitors' => VisitorsModel::all(),
-            'reasons'=> ReasonModel::all(),
             'destinations' => DestinationModel::all(),
         ];
         return view('home',$data);
@@ -48,7 +46,7 @@ class RecordsController extends Controller
             $record->drive = $data['drive'];
             $record->destination_id = $data['destination_id'];
             $record->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
-            $record->reason_id = $data['reason_id'];
+            $record->reason_id = $data['reason'];
             $record->badge = $data['badge'];
             $record->enterprise_id = $visitor->enterprise_id;
             $record->date_entrance = date('Y-m-d H:m:s');
@@ -82,7 +80,7 @@ class RecordsController extends Controller
             1 =>'visitor_id',
             2 => 'destination',
             3=> 'badge',
-            4=> 'reason_id',
+            4=> 'reason',
             5=> 'registred_by',
             6=>'date_entrance',
             7=>'drive',

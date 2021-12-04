@@ -144,15 +144,6 @@
                                         <p>Destinos</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('reason') }}" class="nav-link @yield('reason')">
-                                        <i class="fa fa-list-ul nav-icon"></i>
-                                        <p>Motivos</p>
-                                    </a>
-                                </li>
-
-
-
                             </ul>
                         </li>
                     </ul>

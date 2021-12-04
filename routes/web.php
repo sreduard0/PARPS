@@ -38,10 +38,10 @@ use Illuminate\Support\Facades\Route;
     //POSTS
         Route::post('get_enterprises',[EnterpriseController::class, 'get_enterprises'])->name('get_enterprises');
         Route::post('/enterprise/add',[EnterpriseController::class, 'add_enterprise'])->name('add_enterprise');
+        Route::post('/enterprise/edit',[EnterpriseController::class, 'edit_enterprise']);
     //End Enterprise
 
 
-    Route::get('reason', [ViewController::class, 'reason'])->name('reason');
     Route::get('destination', [ViewController::class, 'destination'])->name('destination');
     Route::get('reports_enterprise', [ViewController::class, 'reports_enterprise'])->name('reports_enterprise');
     Route::get('reports_visitors', [ViewController::class, 'reports_visitors'])->name('reports_visitors');

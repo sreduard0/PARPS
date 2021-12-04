@@ -121,12 +121,13 @@
                     <form>
                         <input type="hidden" id="id" name="id" value="">
                         <div class="form-group col">
-                            <label for="newName">Nome *</label>
+                            <label for="newName">Nome</label>
                             <input type="text" class="form-control" id="newName" name="newName" value="">
                         </div>
                         <div class="form-group col">
-                            <label for="newPhone">Contato</label>
-                            <input type="text" class="form-control" id="newPhone" name="newPhone" value="">
+                            <label for="newPhone">Telefone</label>
+                            <input type="text" class="form-control" data-inputmask="'mask': ['(99) 9 9999-9999']"
+                                inputmode="text" data-mask="" id="newPhone" name="newPhone" placeholder="Telefone" value="">
                         </div>
                         <div class="form-group col">
                             <label for="newAddress">Endereço</label>
@@ -138,7 +139,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button onclick="return edit_app()" class="btn btn-success">Atualizar</button>
+                    <button onclick="return edit_enterprise()" class="btn btn-success">Atualizar</button>
 
                 </div>
             </div>
@@ -208,6 +209,7 @@
                 modal.find('#newName').val(result.name)
                 modal.find('#newPhone').val(result.phone)
                 modal.find('#newAddress').val(result.address)
+                document.getElementById("id").value = id
             })
         });
     </script>
