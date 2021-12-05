@@ -14,7 +14,7 @@ class RecordsModel extends Model
 
     public function destination()
     {
-        return $this->hasOne('App\Models\DestinationModel', 'id', 'destination_id');
+        return $this->hasOne('App\Models\DestinationModel', 'id', 'destination_id')->withTrashed();
     }
 
     use HasFactory;

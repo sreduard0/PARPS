@@ -13,6 +13,8 @@ class Destination extends Migration
             $table->id();
             $table->string('destination');
             $table->string('color');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

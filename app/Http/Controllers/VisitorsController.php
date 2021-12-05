@@ -72,8 +72,7 @@ class VisitorsController extends Controller
     {
         VisitorsModel::find($id)->delete();
     }
-    //=============================={   }================================//
-    //=============================={   }================================//
+    
     //=============================={ DataTables }================================//
     public function get_visitors(Request $request)
     {

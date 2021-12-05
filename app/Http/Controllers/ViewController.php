@@ -14,16 +14,8 @@ class ViewController extends Controller
         return view('reason');
     }
 
-    public function destination()
-    {
-        return view('destination');
-    }
-
 //=========================[RELARÓRIOS]===========================//
-    public function reports_enterprise()
-    {
-        return view('reports_enterprise');
-    }
+ 
 
       public function reports_visitors()
     {

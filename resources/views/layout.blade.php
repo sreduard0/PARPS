@@ -121,6 +121,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('reports_destinations') }}"
+                                        class="nav-link @yield('reports_destinations')">
+                                        <i class="fa fa-map-marker-alt nav-icon"></i>
+                                        <p>Por destinos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('reports_date') }}" class="nav-link @yield('reports_date')">
                                         <i class="fa fa-calendar nav-icon"></i>
                                         <p>Por data</p>

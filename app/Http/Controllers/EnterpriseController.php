@@ -42,7 +42,7 @@ class EnterpriseController extends Controller
 
     }
 
-     //================================={ ADD EMPRESA }====================================//
+    //================================={ editar EMPRESA }====================================//
     public function edit_enterprise(Request $request)
     {
         $data = $request->all();
@@ -63,7 +63,7 @@ class EnterpriseController extends Controller
 
     }
 
-    //================================={ Excluir empresa }====================================//
+    //================================={ info empresa }====================================//
     public function info_enterprise($id)
     {
         return EnterpriseModel::find($id);
@@ -139,6 +139,18 @@ class EnterpriseController extends Controller
         );
 
         return json_encode($json_data);  //enviar dados como formato json
+    }
+
+
+
+
+
+    //==========================================={REPORTS}===========================================//
+
+    //================================={ Lista reports }====================================//
+       public function reports_enterprise()
+    {
+        return view('reports_enterprise');
     }
 
 

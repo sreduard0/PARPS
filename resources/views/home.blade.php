@@ -33,10 +33,11 @@
                             <th>Visitante</th>
                             <th>Empresa</th>
                             <th>Destino</th>
+                            <th>Motivo</th>
                             <th width="15px">Crachá</th>
                             <th>Registrado por</th>
-                            <th>Entrada</th>
-                            <th width="90px">Ações</th>
+                            <th width="130px">Entrada</th>
+                            <th width="80px">Ações</th>
                         </tr>
                     </thead>
                 </table>
@@ -109,14 +110,9 @@
 
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="reason_id">Motivo:</label>
-                                <select id="reason_id" name="reason_id" class="select2" style="width: 100%;">
-                                    <option value="" disabled selected>Selecione um motivo</option>
-                                    @foreach ($reasons as $reason)
-                                        <option value="{{ $reason->id }}">
-                                            {{ $reason->reason }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="reason">Motivo</label>
+                                <input class="form-control" placeholder="Digite o motivo" id="reason" name="reason"
+                                    style="width: 100%;">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="badge_id">Crachá</label>

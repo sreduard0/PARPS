@@ -46,7 +46,7 @@ class RecordsController extends Controller
             $record->drive = $data['drive'];
             $record->destination_id = $data['destination_id'];
             $record->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
-            $record->reason_id = $data['reason'];
+            $record->reason = $data['reason'];
             $record->badge = $data['badge'];
             $record->enterprise_id = $visitor->enterprise_id;
             $record->date_entrance = date('Y-m-d H:m:s');
@@ -79,11 +79,12 @@ class RecordsController extends Controller
             0=> 'id',
             1 =>'visitor_id',
             2 => 'destination',
-            3=> 'badge',
-            4=> 'reason',
-            5=> 'registred_by',
-            6=>'date_entrance',
-            7=>'drive',
+            3 => 'reason',
+            4=> 'badge',
+            5=> 'reason',
+            6=> 'registred_by',
+            7=>'date_entrance',
+            8=>'drive',
         );
 
        //Obtendo registros de número total sem qualquer pesquisa
@@ -107,6 +108,7 @@ class RecordsController extends Controller
             $dado[] = $drive.$record->visitor->name;
             $dado[] = $record->visitor->enterprise->name;
             $dado[] = "<i style='color:".$record->destination->color."' class='m-r-15 fas fa-circle'></i>".$record->destination->destination;
+            $dado[] = $record->reason;
             $dado[] = $record->badge;
             $dado[] = $record->registred_by;
             $dado[] =  date('d/m/Y  H:m', strtotime($record->date_entrance));

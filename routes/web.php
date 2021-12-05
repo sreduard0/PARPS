@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\RecordsController;
@@ -21,29 +22,40 @@ use Illuminate\Support\Facades\Route;
     //Visitors
         Route::get('visitors', [VisitorsController::class, 'visitors'])->name('visitors');
         Route::get('get_profile/{id}',[VisitorsController::class, 'get_profile'])->name('get_profile');
-         Route::get('/visitor/delete/{id}', [VisitorsController::class, 'delete_visitor'])->name('delete_visitor');
+         Route::get('visitor/delete/{id}', [VisitorsController::class, 'delete_visitor'])->name('delete_visitor');
     //POSTS
         Route::post('get_visitors', [VisitorsController::class, 'get_visitors'])->name('get_visitors');
-        Route::post('/edit_img_profile',[VisitorsController::class, 'edit_img_profile']);
-        Route::post('/edit_enterprise_visitor',[VisitorsController::class, 'edit_enterprise_visitor']);
-        Route::post('/visitor/add',[VisitorsController::class, 'add_visitor']);
+        Route::post('edit_img_profile',[VisitorsController::class, 'edit_img_profile']);
+        Route::post('edit_enterprise_visitor',[VisitorsController::class, 'edit_enterprise_visitor']);
+        Route::post('visitor/add',[VisitorsController::class, 'add_visitor']);
     //End Visitors
 
     //Enterprise
         Route::get('enterprise', [EnterpriseController::class, 'enterprise'])->name('enterprise');
-        Route::get('/enterprise/delete/{id}', [EnterpriseController::class, 'delete_enterprise'])->name('delete_enterprise');
-        Route::get('/enterprises_json',[EnterpriseController::class, 'enterprises_json']);
-        Route::get('/enterprise/info/{id}',[EnterpriseController::class, 'info_enterprise'])->name('info_enterprise');
+        Route::get('enterprise/delete/{id}', [EnterpriseController::class, 'delete_enterprise'])->name('delete_enterprise');
+        Route::get('enterprises_json',[EnterpriseController::class, 'enterprises_json']);
+        Route::get('enterprise/info/{id}',[EnterpriseController::class, 'info_enterprise'])->name('info_enterprise');
+        Route::get('reports_enterprise', [EnterpriseController::class, 'reports_enterprise'])->name('reports_enterprise');
 
     //POSTS
         Route::post('get_enterprises',[EnterpriseController::class, 'get_enterprises'])->name('get_enterprises');
-        Route::post('/enterprise/add',[EnterpriseController::class, 'add_enterprise'])->name('add_enterprise');
-        Route::post('/enterprise/edit',[EnterpriseController::class, 'edit_enterprise']);
+        Route::post('enterprise/add',[EnterpriseController::class, 'add_enterprise'])->name('add_enterprise');
+        Route::post('enterprise/edit',[EnterpriseController::class, 'edit_enterprise']);
     //End Enterprise
 
+    //Destination
+    Route::get('destination', [DestinationController::class, 'destination'])->name('destination');
+    Route::get('reports_destinations', [DestinationController::class, 'reports_destinations'])->name('reports_destinations');
+    Route::get('destination/delete/{id}', [DestinationController::class, 'delete_destination'])->name('delete_destination');
 
-    Route::get('destination', [ViewController::class, 'destination'])->name('destination');
-    Route::get('reports_enterprise', [ViewController::class, 'reports_enterprise'])->name('reports_enterprise');
+    //POSTS
+    Route::post('destination/add', [DestinationController::class, 'add_destination']);
+    Route::post('get_destinations', [DestinationController::class, 'get_destinations'])->name('get_destinations');
+    //End Destination
+
+
+
+
     Route::get('reports_visitors', [ViewController::class, 'reports_visitors'])->name('reports_visitors');
     Route::get('reports_date', [ViewController::class, 'reports_date'])->name('reports_date');
 

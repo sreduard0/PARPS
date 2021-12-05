@@ -13,7 +13,7 @@ function register() {
         drive: drive.value,
         phone: phone.value,
         destination_id: destination_id.value,
-        reason_id: reason_id.value,
+        reason: reason.value,
         badge: badge.value
     };
 
@@ -22,7 +22,7 @@ function register() {
         data.drive == "" ||
         data.phone == "" ||
         data.destination_id == "" ||
-        data.reason_id == "" ||
+        data.reason == "" ||
         data.badge == ""
     ){
 
@@ -269,6 +269,82 @@ function confirm_delete(id) {
     });
 }
 
+//================================[EDITAR EMPRESA]================================//
+function edit_enterprise() {
+       var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+    });
+
+
+    var data = {
+        id: id.value,
+        new_name: newName.value,
+        new_phone: newPhone.value,
+        new_address: newAddress.value,
+    };
+
+
+    if ( data.new_name == "" || data.new_phone == "" || data.new_address == ""  ){
+
+        Toast.fire({
+            icon: 'error',
+            title: '&nbsp&nbsp Todos os campos devem estar preenchidos.'
+        });
+
+        return false;
+    }
+
+    if (data.new_phone.replace(/\D+/g, "").length < 11)
+    {
+        Toast.fire({
+            icon: 'error',
+            title: '&nbsp&nbsp Número de telefone incorreto.'
+        });
+        return false;
+    }
+
+
+
+
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        url: '/enterprise/edit',
+        type: 'POST',
+        data: data,
+        dataType: 'text',
+        success: function (data) {
+            if (data == "error") {
+
+                Toast.fire({
+                icon: 'error',
+                title: '&nbsp&nbsp Uma empresa com este nome já está cadastrada.'
+             });
+            } else {
+
+                $("#enterprise_edit").modal('hide');
+                $("#table").DataTable().clear().draw(6);
+                Toast.fire({
+                    icon: 'success',
+                    title: '&nbsp&nbsp Empresa alterada com sucesso.'
+                });
+
+                $('#form-enterprise')[0].reset();
+
+            }
+        },
+
+        error: function (data) {
+             Toast.fire({
+                        icon: 'error',
+                        title: '&nbsp&nbsp Erro ao cadastrar.'
+                    });
+        }
+    });
+}
+
 //================================[ADICIONAR VISITANTE]================================//
 function add_visitor() {
        var Toast = Swal.mixin({
@@ -405,8 +481,8 @@ function delete_visitor(id) {
     });
 }
 
-//================================[EDITAR EMPRESA]================================//
-function edit_enterprise() {
+//================================[ADICIONAR EMPRESA]================================//
+function add_destination() {
        var Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -416,14 +492,16 @@ function edit_enterprise() {
 
 
     var data = {
-        id: id.value,
-        new_name: newName.value,
-        new_phone: newPhone.value,
-        new_address: newAddress.value,
+        destination: destination.value,
+        color: color.value,
     };
 
 
-    if ( data.new_name == "" || data.new_phone == "" || data.new_address == ""  ){
+    if (
+        data.destination == "" ||
+        data.color == ""
+
+    ){
 
         Toast.fire({
             icon: 'error',
@@ -433,50 +511,88 @@ function edit_enterprise() {
         return false;
     }
 
-    if (data.new_phone.replace(/\D+/g, "").length < 11)
-    {
-        Toast.fire({
-            icon: 'error',
-            title: '&nbsp&nbsp Número de telefone incorreto.'
-        });
-        return false;
-    }
-
-
-
-
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        url: '/enterprise/edit',
+        url: '/destination/add',
         type: 'POST',
         data: data,
         dataType: 'text',
         success: function (data) {
+
             if (data == "error") {
 
                 Toast.fire({
                 icon: 'error',
-                title: '&nbsp&nbsp Uma empresa com este nome já está cadastrada.'
+                title: '&nbsp&nbsp Esse destino já existe.'
              });
             } else {
 
-                $("#enterprise_edit").modal('hide');
+                $("#register").modal('hide');
                 $("#table").DataTable().clear().draw(6);
                 Toast.fire({
                     icon: 'success',
-                    title: '&nbsp&nbsp Empresa alterada com sucesso.'
+                    title: '&nbsp&nbsp Destino adicionado com sucesso.'
                 });
 
-                $('#form-enterprise')[0].reset();
+                $('#form-destination')[0].reset();
 
             }
+
         },
 
         error: function (data) {
              Toast.fire({
                         icon: 'error',
-                        title: '&nbsp&nbsp Erro ao cadastrar.'
+                        title: '&nbsp&nbsp Erro ao adicionar.'
                     });
+        }
+    });
+}
+//================================[DELETAR DESTINO]================================//
+function delete_destination(id) {
+       var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+    });
+
+    bootbox.confirm({
+        title: ' Deseja excluir esse destino?',
+        message: '<strong>Essa operação não pode ser desfeita!</strong>',
+        callback: function(confirmacao) {
+
+            if (confirmacao)
+            $.ajax({
+                url:  "/destination/delete/"+id,
+                type: "GET",
+                success: function(data) {
+                   $("#table").DataTable().clear().draw(6);
+                    Toast.fire({
+                        icon: 'success',
+                        title: '&nbsp&nbsp Destino excluido.'
+                    });
+
+                },
+                 error: function(data) {
+                    Toast.fire({
+                        icon: 'error',
+                        title: '&nbsp&nbsp Erro excluir.'
+                    });
+
+                }
+            });
+        },
+        buttons: {
+            cancel: {
+                label: 'Cancelar',
+                className: 'btn-default'
+            },
+            confirm: {
+                label: 'Excluir',
+                className: 'btn-danger'
+            }
+
         }
     });
 }
