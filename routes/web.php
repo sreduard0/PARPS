@@ -4,6 +4,7 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\RecordsController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\VisitorsController;
 use App\Models\EnterpriseModel;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
     //Visitors
         Route::get('visitors', [VisitorsController::class, 'visitors'])->name('visitors');
         Route::get('get_profile/{id}',[VisitorsController::class, 'get_profile'])->name('get_profile');
-         Route::get('visitor/delete/{id}', [VisitorsController::class, 'delete_visitor'])->name('delete_visitor');
+        Route::get('visitor/delete/{id}', [VisitorsController::class, 'delete_visitor'])->name('delete_visitor');
     //POSTS
         Route::post('get_visitors', [VisitorsController::class, 'get_visitors'])->name('get_visitors');
         Route::post('edit_img_profile',[VisitorsController::class, 'edit_img_profile']);
@@ -35,7 +36,6 @@ use Illuminate\Support\Facades\Route;
         Route::get('enterprise/delete/{id}', [EnterpriseController::class, 'delete_enterprise'])->name('delete_enterprise');
         Route::get('enterprises_json',[EnterpriseController::class, 'enterprises_json']);
         Route::get('enterprise/info/{id}',[EnterpriseController::class, 'info_enterprise'])->name('info_enterprise');
-        Route::get('reports_enterprise', [EnterpriseController::class, 'reports_enterprise'])->name('reports_enterprise');
 
     //POSTS
         Route::post('get_enterprises',[EnterpriseController::class, 'get_enterprises'])->name('get_enterprises');
@@ -45,7 +45,6 @@ use Illuminate\Support\Facades\Route;
 
     //Destination
     Route::get('destination', [DestinationController::class, 'destination'])->name('destination');
-    Route::get('reports_destinations', [DestinationController::class, 'reports_destinations'])->name('reports_destinations');
     Route::get('destination/delete/{id}', [DestinationController::class, 'delete_destination'])->name('delete_destination');
 
     //POSTS
@@ -53,10 +52,9 @@ use Illuminate\Support\Facades\Route;
     Route::post('get_destinations', [DestinationController::class, 'get_destinations'])->name('get_destinations');
     //End Destination
 
-
-
-
-    Route::get('reports_visitors', [ViewController::class, 'reports_visitors'])->name('reports_visitors');
+    //Reports
+    Route::get('reports', [ReportsController::class, 'reports_filter'])->name('reports');
+    //End Reports
     Route::get('reports_date', [ViewController::class, 'reports_date'])->name('reports_date');
 
     //GET RECORDS DAY

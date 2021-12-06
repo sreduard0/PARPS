@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\DestinationModel;
+use App\Models\EnterpriseModel;
+use App\Models\RecordsModel;
+use App\Models\VisitorsModel;
 use Illuminate\Http\Request;
 
 class DestinationController extends Controller
@@ -97,21 +100,4 @@ class DestinationController extends Controller
     }
 
 
-
-
-
-
-    //========================================={ REPORTS }============================================//
-
-    //=============================={ LISTA REPORTS }================================//
-    public function reports_destinations()
-    {
-        return view('reports_destinations');
-    }
-    //=============================={   }================================//
-    //=============================={   }================================//
-    //=============================={   }================================//
-    //=============================={   }================================//
-    //=============================={   }================================//
-    //=============================={   }================================//
 }

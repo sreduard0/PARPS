@@ -15,12 +15,8 @@ class ViewController extends Controller
     }
 
 //=========================[RELARÓRIOS]===========================//
- 
 
-      public function reports_visitors()
-    {
-        return view('reports_visitors');
-    }
+
 
       public function reports_date()
     {

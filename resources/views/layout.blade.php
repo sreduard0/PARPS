@@ -97,44 +97,13 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item @yield('reports_open')">
-                            <a href="#" class="nav-link @yield('reports')">
-                                <i class="nav-icon fas fa-clipboard-list"></i>
+                        <li class="nav-item ">
+                            <a href="{{ route('reports') }}" class="nav-link @yield('reports')">
+                                <i class="nav-icon fas fa-file-chart-pie"></i>
                                 <p>
                                     Relatórios
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item ">
-                                    <a href="{{ route('reports_enterprise') }}"
-                                        class="nav-link @yield('reports_enterprise')">
-                                        <i class="fa fa-building nav-icon"></i>
-                                        <p>Por empresa</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('reports_visitors') }}"
-                                        class="nav-link @yield('reports_visitors')">
-                                        <i class="fa fa-users nav-icon"></i>
-                                        <p>Por visitantes</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('reports_destinations') }}"
-                                        class="nav-link @yield('reports_destinations')">
-                                        <i class="fa fa-map-marker-alt nav-icon"></i>
-                                        <p>Por destinos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('reports_date') }}" class="nav-link @yield('reports_date')">
-                                        <i class="fa fa-calendar nav-icon"></i>
-                                        <p>Por data</p>
-                                    </a>
-                                </li>
-
-                            </ul>
                         </li>
                         <li class="nav-item @yield('config_open')">
                             <a href="#" class="nav-link @yield('config')">

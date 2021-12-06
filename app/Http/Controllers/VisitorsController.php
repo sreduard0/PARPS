@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\EnterpriseModel;
+use App\Models\RecordsModel;
 use App\Models\VisitorsModel;
 use Illuminate\Http\Request;
 
@@ -72,7 +73,7 @@ class VisitorsController extends Controller
     {
         VisitorsModel::find($id)->delete();
     }
-    
+
     //=============================={ DataTables }================================//
     public function get_visitors(Request $request)
     {
@@ -140,6 +141,4 @@ class VisitorsController extends Controller
 
         return json_encode($json_data);  //enviar dados como formato json
     }
-
-
 }

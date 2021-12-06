@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\EnterpriseModel;
+use App\Models\RecordsModel;
 use Illuminate\Http\Request;
 
 class EnterpriseController extends Controller
@@ -148,9 +149,25 @@ class EnterpriseController extends Controller
     //==========================================={REPORTS}===========================================//
 
     //================================={ Lista reports }====================================//
-       public function reports_enterprise()
+    public function reports_enterprise()
     {
-        return view('reports_enterprise');
+        $data = [
+            'enterprises' => EnterpriseModel::all(),
+            'enterprise_id' => ''
+        ];
+        return view('reports_enterprise', $data);
+    }
+
+    //================================={ FILTRO EMPRESA }====================================//
+    public function filter_enterprise(Request $request)
+    {
+        $visitors = RecordsModel::where('enterprise_id', $request->input('id'))->get();
+        $data = [
+            'enterprises' => EnterpriseModel::all(),
+            'visitors' => $visitors,
+            'enterprise_id' => $request->input('id')
+        ];
+        return view('reports_enterprise', $data);
     }
 
 
