@@ -16,6 +16,8 @@ class ReportsController extends Controller
     {
         $value = $request->all();
 
+
+
         if(empty($value)){
             $data = [
                 'visitors' => VisitorsModel::all(),
@@ -29,6 +31,19 @@ class ReportsController extends Controller
 
             return view('reports',$data);
         }else{
+
+            $datefrom = '2000-01-01';
+            $dateto = date("Y-m-d H:i:s");
+
+
+            //  date('d/m/Y  H:m', strtotime($record->date_entrance))
+            if($value['datefrom']){
+                $datefrom =  date('Y-m-d H:m', strtotime($value['datefrom']));
+            }
+            if($value['dateto']){
+                $dateto = date('Y-m-d H:m', strtotime($value['dateto']));
+            }
+
             $data = [
                 'visitors' => VisitorsModel::all(),
                 'id_visitor' => $value['visitor_id'],
@@ -36,9 +51,12 @@ class ReportsController extends Controller
                 'enterprise_id' => $value['enterprise_id'],
                 'destinations' => DestinationModel::all(),
                 'destination_id' => $value['destination_id'],
+                'date_from' => $datefrom,
+                'date_to' => $dateto,
                 'reports' => RecordsModel::where('visitor_id', 'LIKE', '%'.$value['visitor_id'] .'%')
                                 ->where('enterprise_id', 'LIKE', '%'.$value['enterprise_id'].'%')
                                 ->where('destination_id', 'LIKE', '%'.$value['destination_id'].'%')
+                                ->whereBetween('date_entrance', [$datefrom, $dateto])
                                 ->get(),
             ];
 

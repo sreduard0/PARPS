@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Route;
 
 // Route::middleware('auth')->group(function(){
     // Records
-    Route::get('/', [RecordsController::class, 'records'])->name('home');
-    Route::get('record/finish/{action}', [RecordsController::class, 'record_finish'])->name('record_finish');
+        Route::get('/', [RecordsController::class, 'records'])->name('home');
+        Route::get('record/finish/{action}', [RecordsController::class, 'record_finish'])->name('record_finish');
 
     //POSTS
-    Route::post('record/visitor', [RecordsController::class, 'record_visitor'])->name('record_visitor');
-    Route::post('get_records',[RecordsController::class, 'get_records'])->name('get_records');
+        Route::post('record/visitor', [RecordsController::class, 'record_visitor'])->name('record_visitor');
+        Route::post('get_records',[RecordsController::class, 'get_records'])->name('get_records');
     //End Records
 
     //Visitors
@@ -44,28 +44,28 @@ use Illuminate\Support\Facades\Route;
     //End Enterprise
 
     //Destination
-    Route::get('destination', [DestinationController::class, 'destination'])->name('destination');
-    Route::get('destination/delete/{id}', [DestinationController::class, 'delete_destination'])->name('delete_destination');
+        Route::get('destination', [DestinationController::class, 'destination'])->name('destination');
+        Route::get('destination/delete/{id}', [DestinationController::class, 'delete_destination'])->name('delete_destination');
 
     //POSTS
-    Route::post('destination/add', [DestinationController::class, 'add_destination']);
-    Route::post('get_destinations', [DestinationController::class, 'get_destinations'])->name('get_destinations');
+        Route::post('destination/add', [DestinationController::class, 'add_destination']);
+        Route::post('get_destinations', [DestinationController::class, 'get_destinations'])->name('get_destinations');
     //End Destination
 
     //Reports
-    Route::get('reports', [ReportsController::class, 'reports_filter'])->name('reports');
+        Route::get('reports', [ReportsController::class, 'reports_filter'])->name('reports');
     //End Reports
-    Route::get('reports_date', [ViewController::class, 'reports_date'])->name('reports_date');
+        Route::get('reports_date', [ViewController::class, 'reports_date'])->name('reports_date');
 
     //GET RECORDS DAY
-    Route::get('get_records_history', function () {
-        $tools = new App\Classes\Tools();
-        $data = [
-            'here' => count($tools->visitors_on_here()),
-            'today' => count($tools->visitors_day())
-        ];
-        return $data;
-    });
+        Route::get('get_records_history', function () {
+            $tools = new App\Classes\Tools();
+            $data = [
+                'here' => count($tools->visitors_on_here()),
+                'today' => count($tools->visitors_day())
+            ];
+            return $data;
+        });
 
 
 

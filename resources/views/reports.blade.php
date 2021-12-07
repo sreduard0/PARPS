@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+
 @endsection
 @section('content')
 
@@ -50,6 +51,27 @@
                             @endforeach
 
                         </select>
+                    </div>
+                    <div class="col">
+                        <label>Data inícial:</label>
+                        <div class="input-group date" id="datefrom" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom"
+                                name="datefrom"
+                                value='@isset($date_from) {{ date('d-m-Y H:m', strtotime($date_from)) }} @endisset' />
+                            <div class="input-group-append" data-target="#datefrom" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label>Data final:</label>
+                        <div class="input-group date" id="dateto" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto" name="dateto"
+                                value='@isset($date_to) {{ date('d-m-Y H:m', strtotime($date_to)) }} @endisset' />
+                            <div class="input-group-append" data-target="#dateto" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
                     </div>
                     <button class="btn btn-success"><i class="fa fa-search"></i></button>
                 </form>
@@ -93,10 +115,10 @@
                                         Está na OM
                                     @endif
                                 </td>
-                                <td>{{ $visitor->date_entrance }}</td>
+                                <td>{{ date('d-m-Y H:m', strtotime($visitor->date_entrance)) }}</td>
                                 <td>
                                     @if ($visitor->date_exit)
-                                        {{ $visitor->date_exit }}
+                                        {{ date('d-m-Y H:m', strtotime($visitor->date_exit)) }}
                                     @else
                                         Está na OM
                                     @endif
@@ -134,6 +156,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    {{-- ESPECIFICOS --}}
     <script src="{{ asset('plugins/datatables/list_portuguese.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
     <script>
@@ -177,6 +200,22 @@
         //Initialize Select2 Elements
         $('.select2s').select2({
             matcher: matchCustom,
+        });
+
+        //Date and time picker
+        $('#datefrom').datetimepicker({
+            icons: {
+                time: 'far fa-clock'
+            },
+            format: 'DD-MM-YYYY H:mm'
+        });
+
+        //Date and time picker
+        $('#dateto').datetimepicker({
+            icons: {
+                time: 'far fa-clock'
+            },
+            format: 'DD-MM-YYYY H:mm'
         });
     </script>
 
