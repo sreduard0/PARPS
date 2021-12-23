@@ -13,15 +13,14 @@ class Records extends Migration
             $table->id();
             $table->integer('visitor_id');
             $table->integer('drive');
-            $table->bigInteger('phone');
             $table->integer('destination_id');
             $table->string('reason');
             $table->integer('badge');
             $table->integer('enterprise_id');
-            $table->timestamps('date_entrance');
+            $table->datetime('date_entrance');
             $table->string('registred_by');
-            $table->timestamps('date_exit');
-            $table->string('finished_by');
+            $table->datetime('date_exit')->nullable();
+            $table->string('finished_by')->nullable();
             $table->integer('status');
             $table->timestamps();
             $table->softDeletes();

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('meta')
-    <title> PARPS - @yield('title')</title>
+    <title>DEV PARPS - @yield('title')</title>
     {{-- ==================================== CSS/JS ===================================== --}}
 
     <!-- Google Font: Source Sans Pro -->
@@ -16,8 +16,7 @@
     <!-- Ionicons -->
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet"
-        href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css') }}">
 
     {{-- CSS ESPECIFICO --}}
     @yield('css')
@@ -32,8 +31,26 @@
     <link rel="stylesheet" href="{{ asset('css/util.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <script type="text/javascript">
+        function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            // adicione um zero na frente de números<10
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('txt').innerHTML = h + ":" + m;
+            t = setTimeout('startTime()', 500);
+        }
 
-
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootbox.min.js') }}"></script>
@@ -44,24 +61,27 @@
 
 </head>
 
-<body class=" @if (session('theme') == 1) dark-mode @endif dark-mode hold-transition sidebar-mini layout-fixed">
+<body onload="startTime()" class=" @if (session('theme') == 1) dark-mode @endif hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="" height="60" width="60">
         </div>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a class="brand-link">
-                <img src="{{ asset('img/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                <img src="{{ asset('img/logo.png') }}" alt="PARPS" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">PARPS</span>
             </a>
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('img/logo.png') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="http://sistao.3bsup.eb.mil.br/{{ session('user')['photo'] }}"
+                            class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="http://sistao.3bsup.eb.mil.br/profile/view" class="d-block">Alexander Pierce</a>
+                        <a href="http://sistao.3bsup.eb.mil.br/profile/view"
+                            class="d-block">{{ session('user')['rank'] }}
+                            {{ session('user')['professionalName'] }}</a>
                     </div>
                 </div>
                 <nav class="mt-2">
@@ -99,31 +119,33 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('reports') }}" class="nav-link @yield('reports')">
-                                <i class="nav-icon fas fa-file-chart-pie"></i>
-                                <p>
-                                    Relatórios
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item @yield('config_open')">
-                            <a href="#" class="nav-link @yield('config')">
-                                <i class="nav-icon fas fa-cog"></i>
-                                <p>
-                                    Configurações
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('destination') }}" class="nav-link @yield('destination')">
-                                        <i class="fa fa-map-marker-alt nav-icon"></i>
-                                        <p>Destinos</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (session('PARPS')['profileType'] >= 1)
+                            <li class="nav-item ">
+                                <a href="{{ route('reports') }}" class="nav-link @yield('reports')">
+                                    <i class="nav-icon fas fa-file-chart-pie"></i>
+                                    <p>
+                                        Relatórios
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item @yield('config_open')">
+                                <a href="#" class="nav-link @yield('config')">
+                                    <i class="nav-icon fas fa-cog"></i>
+                                    <p>
+                                        Configurações
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('destination') }}" class="nav-link @yield('destination')">
+                                            <i class="fa fa-map-marker-alt nav-icon"></i>
+                                            <p>Destinos</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
             </div>
@@ -177,7 +199,7 @@
 
 
                             <div class="card bg-default">
-                                <div class="card-header border-0 bg-primary">
+                                <div class="card-header border-0 bg-success">
 
                                     <h3 class="card-title">
                                         <i class="far fa-calendar-alt"></i>
@@ -191,6 +213,12 @@
                                     <div id="calendar" style="width: 100%"></div>
                                 </div>
                                 <!-- /.card-body -->
+                            </div>
+                            <div class="small-box bg-success">
+                                <div class="inner text-center">
+                                    <span style="font-size:60px"><b id="txt"></b></span>
+                                    <p>Horário de brasília</p>
+                                </div>
                             </div>
 
                         </section>

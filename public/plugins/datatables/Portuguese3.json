@@ -1,8 +1,8 @@
 {
-    "emptyTable": "Não há empresas no momento.",
+    "emptyTable": "Não há visitantes no momento.",
     "loadingRecords": "A carregar...",
     "processing": "A processar...",
-    "lengthMenu": "Mostrar _MENU_ empresas",
+    "lengthMenu": "Mostrar _MENU_ visitantes",
     "zeroRecords": "Não foram encontrados resultados",
     "search": "Procurar por nome:",
     "paginate": {
@@ -159,6 +159,6 @@
             "restore": "Desfazer alterações"
         }
     },
-    "info": "Empresas de _START_ a _END_, N° total de empresas _TOTAL_",
-    "infoEmpty": "Não há empresas."
+    "info": "Visitantes de _START_ a _END_, N° total de visitantes _TOTAL_",
+    "infoEmpty": "Não há visitantes."
 }

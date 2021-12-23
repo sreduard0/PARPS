@@ -34,9 +34,9 @@ class EnterpriseController extends Controller
         }else
         {
             $enterprise = new EnterpriseModel;
-            $enterprise->name = $data['enterprise'];
+            $enterprise->name = strtoupper($data['enterprise']);
             $enterprise->phone =  str_replace(['(',')', '-',' '], '', $data['phone']);
-            $enterprise->address = $data['street'].", N° ".$data['number'].", Bairro ".$data['district'].", ".$data['city'];
+            $enterprise->address = strtoupper($data['street'].", N° ".$data['number'].", Bairro ".$data['district'].", ".$data['city']);
             $enterprise->save();
 
         }
@@ -52,9 +52,9 @@ class EnterpriseController extends Controller
         if(empty($checkExists) || $checkExists->id == $data['id'] )
         {
             $enterprise = EnterpriseModel::find($data['id']);
-            $enterprise->name = $data['new_name'];
+            $enterprise->name = strtoupper($data['new_name']);
             $enterprise->phone =  str_replace(['(',')', '-',' '], '', $data['new_phone']);
-            $enterprise->address = $data['new_address'];
+            $enterprise->address = strtoupper($data['new_address']);
             $enterprise->save();
         }
         else{
@@ -120,7 +120,7 @@ class EnterpriseController extends Controller
         foreach ($enterprises as $enterprise){
             $dado = array();
             $dado[] = $i++;
-            $dado[] = $enterprise->name;
+            $dado[] = strtoupper($enterprise->name);
             $dado[] = $enterprise->phone;
             $dado[] = $enterprise->address;
             $dado[] = "
@@ -141,34 +141,5 @@ class EnterpriseController extends Controller
 
         return json_encode($json_data);  //enviar dados como formato json
     }
-
-
-
-
-
-    //==========================================={REPORTS}===========================================//
-
-    //================================={ Lista reports }====================================//
-    public function reports_enterprise()
-    {
-        $data = [
-            'enterprises' => EnterpriseModel::all(),
-            'enterprise_id' => ''
-        ];
-        return view('reports_enterprise', $data);
-    }
-
-    //================================={ FILTRO EMPRESA }====================================//
-    public function filter_enterprise(Request $request)
-    {
-        $visitors = RecordsModel::where('enterprise_id', $request->input('id'))->get();
-        $data = [
-            'enterprises' => EnterpriseModel::all(),
-            'visitors' => $visitors,
-            'enterprise_id' => $request->input('id')
-        ];
-        return view('reports_enterprise', $data);
-    }
-
 
 }

@@ -73,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-success"><i class="fa fa-search"></i></button>
+                    <button style="height: 40px;" class="btn btn-success m-t-30"><i class="fa fa-search"></i></button>
                 </form>
 
 
@@ -112,16 +112,27 @@
                                     @if ($visitor->finished_by)
                                         {{ $visitor->finished_by }}
                                     @else
-                                        Está na OM
+                                        -
                                     @endif
                                 </td>
-                                <td>{{ date('d-m-Y H:m', strtotime($visitor->date_entrance)) }}</td>
+                                <td>{{ date('d-m-Y H:i', strtotime($visitor->date_entrance)) }}</td>
                                 <td>
-                                    @if ($visitor->date_exit)
-                                        {{ date('d-m-Y H:m', strtotime($visitor->date_exit)) }}
-                                    @else
-                                        Está na OM
-                                    @endif
+                                    @switch($visitor->status)
+                                        @case(0)
+                                            {{ date('d-m-Y H:i', strtotime($visitor->date_exit)) }}
+                                        @break
+
+                                        @case(1)
+                                            O visitante está na OM
+                                        @break
+
+                                        @case(2)
+                                            Este visitante ficou após termino de expediente
+                                        @break
+
+                                        @default
+
+                                    @endswitch
                                 </td>
                                 <td>
                                     <button class='btn btn-primary' title='Ver perfil do visitante' data-toggle='modal'
@@ -207,7 +218,7 @@
             icons: {
                 time: 'far fa-clock'
             },
-            format: 'DD-MM-YYYY H:mm'
+            format: 'DD-MM-YYYY HH:mm'
         });
 
         //Date and time picker
@@ -215,7 +226,7 @@
             icons: {
                 time: 'far fa-clock'
             },
-            format: 'DD-MM-YYYY H:mm'
+            format: 'DD-MM-YYYY HH:mm'
         });
     </script>
 

@@ -12,7 +12,7 @@ class Visitors extends Migration
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);
-            $table->bigInteger('cpf');
+            $table->string('cpf',11);
             $table->bigInteger('phone');
             $table->tinyInteger('cnh');
             $table->integer('enterprise_id');

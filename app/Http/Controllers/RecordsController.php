@@ -17,7 +17,7 @@ class RecordsController extends Controller
         $this->Tools = new Tools();
     }
     //===========================[View]============================
-       function records()
+    function records()
     {
         $data = [
             'visitors' => VisitorsModel::all(),
@@ -45,12 +45,11 @@ class RecordsController extends Controller
             $record->visitor_id = $data['visitor_id'];
             $record->drive = $data['drive'];
             $record->destination_id = $data['destination_id'];
-            $record->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
             $record->reason = $data['reason'];
             $record->badge = $data['badge'];
             $record->enterprise_id = $visitor->enterprise_id;
-            $record->date_entrance = date('Y-m-d H:m:s');
-            $record->registred_by = 'teste';
+            $record->date_entrance = date('Y-m-d H:i:s');
+            $record->registred_by = session('user')['rank']." ".session('user')['professionalName'];
             $record->status = 1;
             $record->save();
 
@@ -63,11 +62,28 @@ class RecordsController extends Controller
     public function record_finish($id)
     {
         $record = RecordsModel::find($id);
-        $record->date_exit = date('Y-m-d H:m:s');
-        $record->finished_by = 'teste';
+        $record->date_exit = date('Y-m-d H:i:s');
+        $record->finished_by = session('user')['rank']." ".session('user')['professionalName'];
         $record->status = 0;
         $record->save();
     }
+
+    //============================{  FINALIZAE EXPEDIENTE }===============================//
+    public function finish_all()
+    {
+        $records = RecordsModel::where('status', 1)->get();
+
+        foreach ($records as $record){
+
+            $record->date_exit = date('Y-m-d H:i:s');
+            $record->finished_by = session('user')['rank']." ".session('user')['professionalName'];
+            $record->status = 2;
+            $record->save();
+
+        }
+
+    }
+
     //================================={ DataTables }====================================//
     public function get_records(Request $request)
     {
@@ -105,8 +121,8 @@ class RecordsController extends Controller
 
             $dado = array();
             $dado[] = "<img class='img-circle img-size-35' src='".$record->visitor->photo."'>";
-            $dado[] = $drive.$record->visitor->name;
-            $dado[] = $record->visitor->enterprise->name;
+            $dado[] = strtoupper($drive.$record->visitor->name);
+            $dado[] = strtoupper($record->visitor->enterprise->name);
             $dado[] = "<i style='color:".$record->destination->color."' class='m-r-15 fas fa-circle'></i>".$record->destination->destination;
             $dado[] = $record->reason;
             $dado[] = $record->badge;

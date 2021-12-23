@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Tools;
 use App\Http\Controllers\Controller;
 use App\Models\EnterpriseModel;
 use App\Models\RecordsModel;
@@ -10,6 +11,13 @@ use Illuminate\Http\Request;
 
 class VisitorsController extends Controller
 {
+      //###################{Classe Tools}###################//
+    private $Tools;
+    public function __construct()
+    {
+        $this->Tools = new Tools();
+    }
+    //####################################################//
     //=============================={  VIEW LISTA }================================//
     public function visitors()
     {
@@ -56,7 +64,7 @@ class VisitorsController extends Controller
         }else{
             $visitor = new VisitorsModel();
 
-            $visitor->name = $data['name'];
+            $visitor->name = strtoupper($data['name']);
             $visitor->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
             $visitor->cnh = $data['cnh'];
             $visitor->enterprise_id = $data['enterprise_id'];
@@ -77,6 +85,7 @@ class VisitorsController extends Controller
     //=============================={ DataTables }================================//
     public function get_visitors(Request $request)
     {
+
         //Receber a requisão da pesquisa
        $requestData = $request->all();
 
@@ -112,8 +121,9 @@ class VisitorsController extends Controller
         foreach ($visitors as $visitor){
             $dado = array();
             $dado[] =  "<img class='img-circle img-size-35' src='".$visitor->photo."'>";
-            $dado[] = $visitor->name;
-            $dado[] = $visitor->phone;
+            $dado[] = strtoupper($visitor->name);
+            $dado[] = $this->Tools->mask('(##) # ####-####',$visitor->phone);
+
              switch ($visitor->cnh) {
                     case 1:
                             $dado[] = 'Sim';

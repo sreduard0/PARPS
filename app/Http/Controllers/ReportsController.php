@@ -31,18 +31,22 @@ class ReportsController extends Controller
 
             return view('reports',$data);
         }else{
-
             $datefrom = '2000-01-01';
-            $dateto = date("Y-m-d H:i:s");
+            $dateto = date("Y-m-d H:i");
 
 
-            //  date('d/m/Y  H:m', strtotime($record->date_entrance))
             if($value['datefrom']){
-                $datefrom =  date('Y-m-d H:m', strtotime($value['datefrom']));
+                $datefrom =  date('Y-m-d H:i', strtotime($value['datefrom']));
             }
             if($value['dateto']){
-                $dateto = date('Y-m-d H:m', strtotime($value['dateto']));
+                $dateto = date('Y-m-d H:i', strtotime($value['dateto']));
             }
+
+            $records = RecordsModel::where('visitor_id', 'LIKE', $value['visitor_id'])
+                                ->where('enterprise_id', 'LIKE', $value['enterprise_id'])
+                                ->where('destination_id', 'LIKE', $value['destination_id'])
+                                ->whereBetween('date_entrance', [$datefrom, $dateto])
+                                ->get();
 
             $data = [
                 'visitors' => VisitorsModel::all(),
@@ -53,11 +57,7 @@ class ReportsController extends Controller
                 'destination_id' => $value['destination_id'],
                 'date_from' => $datefrom,
                 'date_to' => $dateto,
-                'reports' => RecordsModel::where('visitor_id', 'LIKE', '%'.$value['visitor_id'] .'%')
-                                ->where('enterprise_id', 'LIKE', '%'.$value['enterprise_id'].'%')
-                                ->where('destination_id', 'LIKE', '%'.$value['destination_id'].'%')
-                                ->whereBetween('date_entrance', [$datefrom, $dateto])
-                                ->get(),
+                'reports' => $records,
             ];
 
             return view('reports',$data);

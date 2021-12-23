@@ -29,7 +29,7 @@ class DestinationController extends Controller
         }else{
             $destination = new DestinationModel();
 
-            $destination->destination = $data['destination'];
+            $destination->destination = strtoupper($data['destination']);
             $destination->color = $data['color'];
             $destination->save();
         }

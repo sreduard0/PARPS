@@ -8,7 +8,7 @@ $(function () {
             "emptyTable": "Não foi encontrado nenhum registo",
             "loadingRecords": "A carregar...",
             "processing": "A processar...",
-            "lengthMenu": "Mostrar _MENU_ usuários",
+            "lengthMenu": "Mostrar _MENU_ registros",
             "zeroRecords": "Não foram encontrados resultados",
             "search": "Procurar:",
             "paginate": {
@@ -165,8 +165,8 @@ $(function () {
                     "restore": "Desfazer alterações"
                 }
             },
-            "info": "Usuários de _START_ a _END_, N° total de usuários _TOTAL_",
-            "infoEmpty": "Não há usuários cadastrados."
+            "info": "Registros de _START_ a _END_, N° total de registros _TOTAL_",
+            "infoEmpty": "Não há registros cadastrados."
 
 
         },

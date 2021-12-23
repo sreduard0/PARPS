@@ -22,6 +22,10 @@
     <section class="col ">
         <div class="card">
             <div class="card-header">
+                @if (session('PARPS')['profileType'] == 1)
+                    <button class="float-l btn btn-success" onclick='return finish_all()'>Finalizar
+                        expediante</button>
+                @endif
                 <button class="float-r btn btn-success" data-toggle="modal" data-target="#register">Nova
                     entrada</button>
             </div>
@@ -89,7 +93,7 @@
                             <div class="form-group col-md-3">
                                 <label>Entrada</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" value="{{ date('d/m/Y h:m') }}" disabled>
+                                    <input type="text" class="form-control" value="{{ date('d/m/Y h:i') }}" disabled>
                                     <div class="input-group-text"><i class="fa fa-calendar"></i>
                                     </div>
                                 </div>

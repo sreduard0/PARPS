@@ -108,7 +108,7 @@
                     'aTargets': [0, 2, 3]
                 }],
                 "language": {
-                    "url": "{{ asset('plugins/datatables/Portuguese2.json') }}"
+                    "url": "{{ asset('plugins/datatables/Portuguese4.json') }}"
                 },
                 "processing": true,
                 "serverSide": true,

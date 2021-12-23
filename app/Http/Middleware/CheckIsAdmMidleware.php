@@ -9,7 +9,7 @@ class CheckIsAdmMidleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (session('SisTAO')['profileType'] == 1) {
+        if (session('PARPS')['profileType'] >= 1) {
             return $next($request);
         }
 

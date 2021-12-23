@@ -1,8 +1,8 @@
 {
-    "emptyTable": "Não foi encontrado nenhum registro",
+    "emptyTable": "Não foi encontrado nenhum destino",
     "loadingRecords": "Carregando...",
     "processing": "Processando...",
-    "lengthMenu": "Mostrar _MENU_ registros",
+    "lengthMenu": "Mostrar _MENU_ destinos",
     "zeroRecords": "Não foram encontrados resultados",
     "search": "Procurar:",
     "paginate": {
@@ -137,12 +137,12 @@
         "close": "Fechar",
         "create": {
             "button": "Novo",
-            "title": "Criar novo registro",
+            "title": "Criar novo destino",
             "submit": "Criar"
         },
         "edit": {
             "button": "Editar",
-            "title": "Editar registro",
+            "title": "Editar destino",
             "submit": "Atualizar"
         },
         "remove": {
@@ -159,6 +159,6 @@
             "restore": "Desfazer alterações"
         }
     },
-    "info": "Registros de _START_ a _END_, N° total de registros _TOTAL_",
-    "infoEmpty": "Não há registros."
+    "info": "Destinos de _START_ a _END_, N° total de destinos _TOTAL_",
+    "infoEmpty": "Não há destinos."
 }

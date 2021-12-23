@@ -598,6 +598,56 @@ function delete_destination(id) {
 }
 
 
+//================================[RESGISTRANDO SAIDA]================================//
+function finish_all(id) {
+       var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+    });
+
+    bootbox.confirm({
+        title: ' Deseja encerrar o expediente?',
+        message: '<strong>Essa operação não pode ser desfeita!</strong> <br> Lembre-se de avisar a guarda que há civis nas dependências da OM.',
+        callback: function(confirmacao) {
+
+            if (confirmacao)
+            $.ajax({
+                url:  '/finish_all',
+                type: "GET",
+                success: function(data) {
+                   $("#table").DataTable().clear().draw(6);
+                    Toast.fire({
+                        icon: 'success',
+                        title: '&nbsp&nbsp Expediente encerrado com sucesso.'
+                    });
+
+                },
+                 error: function(data) {
+                    Toast.fire({
+                        icon: 'error',
+                        title: '&nbsp&nbsp Erro ao encerrar'
+                    });
+
+                }
+            });
+        },
+        buttons: {
+            cancel: {
+                label: 'Cancelar',
+                className: 'btn-default'
+            },
+            confirm: {
+                label: 'Encerrar',
+                className: 'btn-success'
+            }
+
+        }
+    });
+}
+
+
 
 
 
