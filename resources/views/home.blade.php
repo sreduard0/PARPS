@@ -84,7 +84,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Telefone</label>
+                                <label for="phone">Telefone (optional)</label>
                                 <input type="text" class="form-control" data-inputmask="'mask': ['(99) 9 9999-9999']"
                                     inputmode="text" data-mask="" id="phone" name="phone" placeholder="Telefone" value="">
                             </div>
@@ -98,7 +98,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="form-group col-md-3">
                                 <label for="destination_id">Destino:</label>

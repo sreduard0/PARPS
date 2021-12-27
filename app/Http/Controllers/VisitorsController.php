@@ -76,6 +76,28 @@ class VisitorsController extends Controller
 
 
     }
+
+    //========================{ EDITANDO VISITANTE }==========================//
+    public function edit_visitor(Request $request)
+    {
+        $data = $request->all();
+
+        $checkVisitor = VisitorsModel::where('cpf', str_replace(['.', '-',' '], '', $data['cpf']))->first();
+
+        if (empty($checkVisitor) || $checkVisitor->id == $data['id']){
+
+        $visitor = VisitorsModel::find($data['id']);
+
+        $visitor->name = strtoupper($data['name']);
+        $visitor->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
+        $visitor->cnh = $data['cnh'];
+        $visitor->cpf = str_replace(['.', '-',' '], '', $data['cpf']);
+        $visitor->save();
+
+        }else{
+            return 'error';
+        }
+    }
     //=============================={ DELETA O VISITANTE }================================//
     public function delete_visitor($id)
     {

@@ -20,7 +20,6 @@ function register() {
     if (
         data.visitor_id == "" ||
         data.drive == "" ||
-        data.phone == "" ||
         data.destination_id == "" ||
         data.reason == "" ||
         data.badge == ""
@@ -34,7 +33,7 @@ function register() {
         return false;
     }
 
-    if (data.phone.replace(/\D+/g, "").length < 11)
+    if (data.phone.replace(/\D+/g, "").length > 1 && data.phone.replace(/\D+/g, "").length < 11)
     {
         Toast.fire({
             icon: 'error',
@@ -382,6 +381,15 @@ function add_visitor() {
         return false;
     }
 
+       if (data.cpf.replace(/\D+/g, "").length < 11)
+    {
+        Toast.fire({
+            icon: 'error',
+            title: '&nbsp&nbsp Número de CPF incorreto.'
+        });
+        return false;
+    }
+
     if (data.phone.replace(/\D+/g, "").length < 11)
     {
         Toast.fire({
@@ -481,7 +489,7 @@ function delete_visitor(id) {
     });
 }
 
-//================================[ADICIONAR EMPRESA]================================//
+//================================[ADICIONAR DESTINO]================================//
 function add_destination() {
        var Toast = Swal.mixin({
         toast: true,
@@ -548,6 +556,7 @@ function add_destination() {
         }
     });
 }
+
 //================================[DELETAR DESTINO]================================//
 function delete_destination(id) {
        var Toast = Swal.mixin({
@@ -597,8 +606,7 @@ function delete_destination(id) {
     });
 }
 
-
-//================================[RESGISTRANDO SAIDA]================================//
+//================================[RESGISTRANDO FIM DE EXPEDIENTE]================================//
 function finish_all(id) {
        var Toast = Swal.mixin({
         toast: true,

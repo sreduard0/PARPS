@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function(){
         Route::post('edit_img_profile',[VisitorsController::class, 'edit_img_profile']);
         Route::post('edit_enterprise_visitor',[VisitorsController::class, 'edit_enterprise_visitor']);
         Route::post('visitor/add',[VisitorsController::class, 'add_visitor']);
+          Route::post('visitor/edit',[VisitorsController::class, 'edit_visitor']);
     //End Visitors
 
     //Enterprise

@@ -37,9 +37,7 @@ class RecordsController extends Controller
         if(!empty($records) || $data['drive'] > $visitor->cnh)
         {
             return 'error';
-        }
-
-        else{
+        }else{
             $record = new RecordsModel();
 
             $record->visitor_id = $data['visitor_id'];
@@ -53,8 +51,10 @@ class RecordsController extends Controller
             $record->status = 1;
             $record->save();
 
-            $visitor->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
-            $visitor->save();
+            if(!empty($data['phone'])){
+                $visitor->phone = str_replace(['(',')', '-',' '], '', $data['phone']);
+                $visitor->save();
+            }
 
         }
     }

@@ -81,7 +81,7 @@
                             <div class="col-md-3 form-group ">
                                 <label for="cpf">CPF</label>
                                 <input type="text" class="form-control" data-inputmask="'mask': ['999.999.999-99']"
-                                    inputmode="text" data-mask="" id="cpf" name="cpf" placeholder="Telefone" value="">
+                                    inputmode="text" data-mask="" id="cpf" name="cpf" placeholder="CPF" value="">
                             </div>
                         </div>
                         <div class="row">
