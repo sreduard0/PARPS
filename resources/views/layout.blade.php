@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('meta')
     <title>DEV PARPS - @yield('title')</title>
+    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
     {{-- ==================================== CSS/JS ===================================== --}}
 
     <!-- Google Font: Source Sans Pro -->
@@ -61,7 +62,8 @@
 
 </head>
 
-<body onload="startTime()" class=" @if (session('theme') == 1) dark-mode @endif hold-transition sidebar-mini layout-fixed">
+<body onload="startTime()"
+    class=" @if (session('theme') == 1) dark-mode @endif hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="" height="60" width="60">
@@ -232,7 +234,8 @@
         <footer class="main-footer align-items-center ">
             <footer>
                 <div class="text-center">
-                    &copy;PARPS {{ date('Y') }} (v1.0) &copy;SisTAO {{ date('Y') }} (v1.0) <br>
+                    &copy;PARPS {{ date('Y') }} (v1.3) | integrado com &copy;SisTAO {{ date('Y') }} (v1.5)
+                    <br>
                     Desenvolvido por: Eduardo Martins
                 </div>
             </footer>
@@ -244,9 +247,6 @@
     {{-- ========================== MODAL ========================== --}}
     @yield('modal')
     {{-- ==================================== PLUGINS ===================================== --}}
-
-
-
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -269,6 +269,7 @@
     <script src="{{ asset('js/adminlte.js') }}"></script>
     <!-- date-range-picker -->
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    @yield('plugins')
     <script>
         setInterval(function() {
             var url = '/get_records_history';
@@ -278,7 +279,7 @@
             })
         }, 5000);
     </script>
-    @yield('plugins')
+
     {{-- ====================================/ PLUGINS ===================================== --}}
 </body>
 

@@ -662,8 +662,7 @@ function search_reports() {
         position: 'top-end',
         showConfirmButton: false,
         timer: 4000
-    });
-
+       });
 
     var data = {
         visitor_id: visitor_id.value,
@@ -676,10 +675,3 @@ function search_reports() {
     $('#table').DataTable().column(1).search(data.visitor_id).column(2).search(data.enterprise_id).column(3).search(data.destination_id).column(6).search(data.datefrom).column(7).search(data.dateto).draw();
 
 }
-
-
-
-
-
-
-

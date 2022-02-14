@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-
 @endsection
 @section('content')
 
@@ -23,7 +22,8 @@
                         <select id="visitor_id" name="visitor_id" class="select2s" style="width: 100%;">
                             <option value="" selected="selected">Todos</option>
                             @foreach ($visitors as $visitor)
-                                <option @if ($id_visitor == $visitor->id) selected @endif title="{{ $visitor->cpf }}" value="{{ $visitor->id }}">
+                                <option @if ($id_visitor == $visitor->id) selected @endif title="{{ $visitor->cpf }}"
+                                    value="{{ $visitor->id }}">
                                     {{ $visitor->name }}</option>
                             @endforeach
 
@@ -34,7 +34,8 @@
                         <select id="enterprise_id" name="enterprise_id" class="select2" style="width: 100%;">
                             <option value="" selected="selected">Todas</option>
                             @foreach ($enterprises as $enterprise)
-                                <option @if ($enterprise_id == $enterprise->id) selected @endif value="{{ $enterprise->id }}"> {{ $enterprise->name }}
+                                <option @if ($enterprise_id == $enterprise->id) selected @endif value="{{ $enterprise->id }}">
+                                    {{ $enterprise->name }}
                                 </option>
                             @endforeach
 
@@ -56,7 +57,7 @@
                         <label>Data inícial:</label>
                         <div class="input-group date" data-target-input="nearest">
                             <input type="text" class="form-control datetimepicker-input" data-target="#datefrom"
-                                name="datefrom" id="datefrom" value='' />
+                                name="datefrom" id="datefrom" value='01-{{ date('m-Y') }} 08:00' />
                             <div class="input-group-append" data-target="#datefrom" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -66,7 +67,7 @@
                         <label>Data final:</label>
                         <div class="input-group date" data-target-input="nearest">
                             <input type="text" id="dateto" class="form-control datetimepicker-input" data-target="#dateto"
-                                name="dateto" value='' />
+                                name="dateto" value='{{ date('d-m-Y H:i:s') }}' />
                             <div class="input-group-append" data-target="#dateto" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -75,10 +76,9 @@
                     <button onclick="return search_reports()" style="height: 40px;" class="btn btn-success m-t-30"><i
                             class="fa fa-search"></i></button>
                 </div>
-
-
             </div>
             <div class="card-body">
+
                 <table id="table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -110,7 +110,7 @@
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.js') }}"></script>
     <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
     <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
@@ -120,21 +120,21 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
     <script src="{{ asset('js/actions.js') }}"></script>
-
-
     {{-- ESPECIFICOS --}}
 
     <script>
         $(function() {
             $("#table").DataTable({
                 "paging": true,
+                "bFilter": false,
+                "processing": true,
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
                 "language": {
                     "url": "{{ asset('plugins/datatables/Portuguese3.json') }}"
                 },
-                "processing": true,
+                "dom": 'Bfrtip',
                 "serverSide": true,
                 "ajax": {
                     "url": "{{ route('get_reports') }}",
@@ -142,10 +142,9 @@
                     "headers": {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}",
                     },
-
                 },
-                "buttons": ["excel", "pdf", "print", ]
-            }).buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
+                "buttons": ["excel", "pdf", "print"]
+            }).buttons().container().appendTo('#table_wrapper ');
 
         });
     </script>
