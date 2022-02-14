@@ -24,7 +24,7 @@
             <div class="card-header">
                 @if (session('PARPS')['profileType'] == 1)
                     <button class="float-l btn btn-success" onclick='return finish_all()'>Finalizar
-                        expediante</button>
+                        expediente</button>
                 @endif
                 <button class="float-r btn btn-success" data-toggle="modal" data-target="#register">Nova
                     entrada</button>

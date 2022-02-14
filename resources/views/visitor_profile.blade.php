@@ -56,8 +56,12 @@
                                             <h3 class="card-title card-title-background "> <i
                                                     class="fas fa-user mr-1"></i>
                                                 Informações pessoais</h3>
-                                            <button class="btn btn-default float-r" data-toggle="modal"
+
+                                         @if (session('PARPS')['profileType'] == 1)
+          									  <button class="btn btn-default float-r" data-toggle="modal"
                                                 data-target="#edit_info_visitor"><i class="fa fa-pen"></i></button>
+               							 @endif
+
                                         </div>
                                         <div class="card-body">
                                             <div class="card-body">
@@ -155,7 +159,8 @@
 
 
 <!-- Modal INFO VISITOR -->
-<div class="modal fade" id="edit_info_visitor" tabindex="-1" role="dialog" aria-labelledby="edit_info_visitorLabel"
+ @if (session('PARPS')['profileType'] == 1)
+   <div class="modal fade" id="edit_info_visitor" tabindex="-1" role="dialog" aria-labelledby="edit_info_visitorLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-small modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -206,10 +211,8 @@
     </div>
 </div>
 
+ @endif
 
-{{-- @if (session('PARPS')['profileType'] == 1)
-
-@endif --}}
 
 {{-- SCRIPTS --}}
 <script>
@@ -242,8 +245,8 @@
         })
     });
 </script>
-
-<script>
+ @if (session('PARPS')['profileType'] == 1)
+       <script>
     $('#edit_info_visitor').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         var id = $('#v_id').val();
@@ -351,6 +354,8 @@
         });
     }
 </script>
+ @endif
+
 
 <script>
     function editenterprise() {

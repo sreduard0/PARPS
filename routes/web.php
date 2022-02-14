@@ -52,7 +52,6 @@ Route::middleware('auth')->group(function(){
             Route::get('destination', [DestinationController::class, 'destination'])->name('destination');
             Route::get('destination/delete/{id}', [DestinationController::class, 'delete_destination'])->name('delete_destination');
 
-
         //POSTS
             Route::post('destination/add', [DestinationController::class, 'add_destination']);
             Route::post('get_destinations', [DestinationController::class, 'get_destinations'])->name('get_destinations');
@@ -60,6 +59,9 @@ Route::middleware('auth')->group(function(){
 
         //Reports
             Route::get('reports', [ReportsController::class, 'reports_filter'])->name('reports');
+
+        //POSTS
+            Route::post('get_reports', [ReportsController::class, 'get_reports'])->name('get_reports');
         //End Reports
     });
     //GET RECORDS DAY

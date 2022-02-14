@@ -655,6 +655,29 @@ function finish_all(id) {
     });
 }
 
+//================================[BUSCANDO RELATORIOS]================================//
+function search_reports() {
+       var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+    });
+
+
+    var data = {
+        visitor_id: visitor_id.value,
+        enterprise_id: enterprise_id.value,
+        destination_id: destination_id.value,
+        datefrom: datefrom.value,
+        dateto: dateto.value
+    };
+
+    $('#table').DataTable().column(1).search(data.visitor_id).column(2).search(data.enterprise_id).column(3).search(data.destination_id).column(6).search(data.datefrom).column(7).search(data.dateto).draw();
+
+}
+
+
 
 
 

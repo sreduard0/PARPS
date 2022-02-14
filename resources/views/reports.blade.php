@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'Relatórios')
 @section('reports', 'active')
-@section('title-header', 'Relatório por destinos')
+@section('title-header', 'Relatório')
 @section('css')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -17,7 +17,7 @@
     <section class="col ">
         <div class="card">
             <div class="card-header">
-                <form action="{{ url('/reports') }}" method="GET" class="row">
+                <div id="form" class="row">
                     <div class="col">
                         <label for="visitor_id">Visitante</label>
                         <select id="visitor_id" name="visitor_id" class="select2s" style="width: 100%;">
@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="col">
-                        <label for="visitor_id">Empresa</label>
+                        <label for="enterprise_id">Empresa</label>
                         <select id="enterprise_id" name="enterprise_id" class="select2" style="width: 100%;">
                             <option value="" selected="selected">Todas</option>
                             @foreach ($enterprises as $enterprise)
@@ -41,7 +41,7 @@
                         </select>
                     </div>
                     <div class="col">
-                        <label for="visitor_id">Destino</label>
+                        <label for="destination_id">Destino</label>
                         <select id="destination_id" name="destination_id" class="select2" style="width: 100%;">
                             <option value="" selected="selected">Todos</option>
                             @foreach ($destinations as $destination)
@@ -54,10 +54,9 @@
                     </div>
                     <div class="col">
                         <label>Data inícial:</label>
-                        <div class="input-group date" id="datefrom" data-target-input="nearest">
+                        <div class="input-group date" data-target-input="nearest">
                             <input type="text" class="form-control datetimepicker-input" data-target="#datefrom"
-                                name="datefrom"
-                                value='@isset($date_from) {{ date('d-m-Y H:m', strtotime($date_from)) }} @endisset' />
+                                name="datefrom" id="datefrom" value='' />
                             <div class="input-group-append" data-target="#datefrom" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -65,16 +64,17 @@
                     </div>
                     <div class="col">
                         <label>Data final:</label>
-                        <div class="input-group date" id="dateto" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto" name="dateto"
-                                value='@isset($date_to) {{ date('d-m-Y H:m', strtotime($date_to)) }} @endisset' />
+                        <div class="input-group date" data-target-input="nearest">
+                            <input type="text" id="dateto" class="form-control datetimepicker-input" data-target="#dateto"
+                                name="dateto" value='' />
                             <div class="input-group-append" data-target="#dateto" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
                     </div>
-                    <button style="height: 40px;" class="btn btn-success m-t-30"><i class="fa fa-search"></i></button>
-                </form>
+                    <button onclick="return search_reports()" style="height: 40px;" class="btn btn-success m-t-30"><i
+                            class="fa fa-search"></i></button>
+                </div>
 
 
             </div>
@@ -86,7 +86,6 @@
                             <th>Visitante</th>
                             <th>Destino</th>
                             <th>Motivo</th>
-                            <th width="15px">Crachá</th>
                             <th>Registrado por</th>
                             <th>Finalizado por</th>
                             <th width="130px">Entrada</th>
@@ -94,54 +93,6 @@
                             <th width="40px">Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($reports as $visitor)
-                            <tr>
-                                <td><img class='img-circle img-size-35' src='{{ $visitor->visitor->photo }}'></td>
-                                <td>
-                                    @if ($visitor->drive == 1)
-                                        <i class='m-r-15 fas fa-steering-wheel'></i>
-                                    @endif
-                                    {{ $visitor->visitor->name }}
-                                </td>
-                                <td>{{ $visitor->destination->destination }}</td>
-                                <td>{{ $visitor->reason }}</td>
-                                <td>{{ $visitor->badge }}</td>
-                                <td>{{ $visitor->registred_by }}</td>
-                                <td>
-                                    @if ($visitor->finished_by)
-                                        {{ $visitor->finished_by }}
-                                    @else
-                                        -
-                                    @endif
-                                </td>
-                                <td>{{ date('d-m-Y H:i', strtotime($visitor->date_entrance)) }}</td>
-                                <td>
-                                    @switch($visitor->status)
-                                        @case(0)
-                                            {{ date('d-m-Y H:i', strtotime($visitor->date_exit)) }}
-                                        @break
-
-                                        @case(1)
-                                            O visitante está na OM
-                                        @break
-
-                                        @case(2)
-                                            Este visitante ficou após termino de expediente
-                                        @break
-
-                                        @default
-
-                                    @endswitch
-                                </td>
-                                <td>
-                                    <button class='btn btn-primary' title='Ver perfil do visitante' data-toggle='modal'
-                                        data-target='#visitor_profile' data-id='{{ $visitor->visitor->id }}'><i
-                                            class='fa fa-user'></i></button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
@@ -159,7 +110,7 @@
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.js') }}"></script>
     <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
     <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
@@ -167,9 +118,37 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    {{-- ESPECIFICOS --}}
-    <script src="{{ asset('plugins/datatables/list_portuguese.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
+    <script src="{{ asset('js/actions.js') }}"></script>
+
+
+    {{-- ESPECIFICOS --}}
+
+    <script>
+        $(function() {
+            $("#table").DataTable({
+                "paging": true,
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "language": {
+                    "url": "{{ asset('plugins/datatables/Portuguese3.json') }}"
+                },
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "{{ route('get_reports') }}",
+                    "type": "POST",
+                    "headers": {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                    },
+
+                },
+                "buttons": ["excel", "pdf", "print", ]
+            }).buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
+
+        });
+    </script>
     <script>
         $('.select2').select2();
 

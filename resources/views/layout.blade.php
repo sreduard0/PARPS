@@ -91,7 +91,7 @@
                             <a href="{{ route('home') }}" class="nav-link @yield('home')">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
-                                    Início
+                                    Entrada
                                 </p>
                             </a>
                         </li>
