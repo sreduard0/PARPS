@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <style>
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
+            text-align: right;
+            visibility: hidden;
+        }
+
+    </style>
 @endsection
 @section('content')
 
@@ -126,7 +134,6 @@
         $(function() {
             $("#table").DataTable({
                 "paging": true,
-                "bFilter": false,
                 "processing": true,
                 "responsive": true,
                 "lengthChange": true,
@@ -144,7 +151,7 @@
                     },
                 },
                 "buttons": ["excel", "pdf", "print"]
-            }).buttons().container().appendTo('#table_wrapper ');
+            });
 
         });
     </script>
