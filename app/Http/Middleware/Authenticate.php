@@ -10,10 +10,12 @@ class Authenticate
     public function handle(Request $request, Closure $next)
     {
 
+
+        $s = session('PARPS');
         $session = session('user');
-        if (!$session) {
-            return redirect('http://sistao.3bsup.eb.mil.br');
+        if ($session && $s) {
+            return $next($request);
         }
-        return $next($request);
+        return redirect('http://sistao.3bsup.eb.mil.br');
     }
 }
