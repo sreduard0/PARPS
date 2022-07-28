@@ -193,7 +193,13 @@ function takeSnapShot(){
 	ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
 	//Criando o JPG
-	var dataURI = canvas.toDataURL('image/jpeg'); //O resultado é um BASE64 de uma imagem.
+    var dataURI = canvas.toDataURL('image/jpeg'); //O resultado é um BASE64 de uma imagem.
+
+    
+
+
+
+
 }
 
 // FIM CAMERA
