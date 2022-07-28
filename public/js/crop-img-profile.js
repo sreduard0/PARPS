@@ -194,37 +194,6 @@ function takeSnapShot(){
 
 	//Criando o JPG
 	var dataURI = canvas.toDataURL('image/jpeg'); //O resultado é um BASE64 de uma imagem.
-
- $image = $('#image_demo').croppie({
-        enableExif: true,
-        viewport: {
-            width: 300,
-            height: 300,
-            type: 'square' //circle
-        },
-        boundary: {
-            width: 400,
-            height: 400
-        }
-    });
-
-    dataURI.on('change', function() {
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            $image.croppie('bind', {
-                url: event.target.result
-            }).then(function() {
-                console.log('jQuery bind complete');
-            });
-        }
-        reader.readAsDataURL(this.files[0]);
-        $('#register').modal('hide');
-        $('#uploadimage').modal('show');
-        $('.fab').removeClass('show');
-    });
-
-
-
 }
 
 // FIM CAMERA
