@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+
 @endsection
 @section('content')
     <section class="col ">
@@ -39,7 +40,7 @@
 @endsection
 @section('modal')
 
-    <!-- Modal -->
+    <!-- Modal PERFIL -->
     <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -61,10 +62,26 @@
                                 <img id="img_profile" class="img-circle" src="{{ asset('img/people.png') }}"
                                     alt="User Avatar">
                                 <div class="panel-body">
-                                    <label for="upload_image" class="btn btn-success edit-img-profile"><i
-                                            class="fa fa-pen"></i></label>
-                                    <input type="file" class="btn btn-success input-img-profile" name="upload_image"
-                                        id="upload_image" accept="image/png,image/jpg,image/jpeg" />
+                                    <div class="fab">
+                                        <button class="main">
+                                            <i class="fas fa-image"></i>
+                                        </button>
+                                        <ul>
+                                            <li>
+                                                <label for="upload_image"><i class="m-t-9 fas fa-file-image"></i></label>
+                                                <input type="file" class="btn btn-success input-img-profile"
+                                                    name="upload_image" id="upload_image"
+                                                    accept="image/png,image/jpg,image/jpeg" />
+                                            </li>
+                                            <li>
+                                                <button onclick="return loadCamera();" data-toggle="modal"
+                                                    data-target="#webcam">
+                                                    <i class="fas fa-camera"></i>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -81,14 +98,16 @@
                             <div class="col-md-3 form-group ">
                                 <label for="cpf">CPF</label>
                                 <input type="text" class="form-control" data-inputmask="'mask': ['999.999.999-99']"
-                                    inputmode="text" data-mask="" id="cpf" name="cpf" placeholder="CPF" value="">
+                                    inputmode="text" data-mask="" id="cpf" name="cpf" placeholder="CPF"
+                                    value="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3 form-group ">
                                 <label for="phone">Telefone</label>
                                 <input type="text" class="form-control" data-inputmask="'mask': ['(99) 9 9999-9999']"
-                                    inputmode="text" data-mask="" id="phone" name="phone" placeholder="Telefone" value="">
+                                    inputmode="text" data-mask="" id="phone" name="phone" placeholder="Telefone"
+                                    value="">
                             </div>
                             <div class="form-group col">
                                 <label for="cnh">CNH</label>
@@ -108,8 +127,9 @@
                                 </select>
                             </div>
                         </div>
+
+                    </form>
                 </div>
-                </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="button" class="btn btn-success" onclick="return add_visitor()">Cadastrar</button>
@@ -117,25 +137,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Modal de envio de imagem --}}
-    <div id="uploadimage" class="modal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Ajustar imagem</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="image_demo"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                    <button class="btn btn-success crop_image">Enviar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     @include('visitor_profile')
 @endsection
 @section('plugins')

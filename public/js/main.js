@@ -106,7 +106,7 @@ function save(sts) {
 
 
 
-        url: "http://sistao.3bsup.eb.mil.br/theme/"+sts,
+        url: "/theme/"+sts,
         type: "GET",
         success: function(data) {
             Toast.fire({
@@ -122,5 +122,6 @@ function save(sts) {
         }
     });
 }
+
 
 

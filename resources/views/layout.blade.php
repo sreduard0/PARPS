@@ -66,7 +66,8 @@
     class=" @if (session('theme') == 1) dark-mode @endif hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="" height="60" width="60">
+            <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="" height="60"
+                width="60">
         </div>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a class="brand-link">
@@ -77,11 +78,11 @@
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="http://sistao.3bsup.eb.mil.br/{{ session('user')['photo'] }}"
+                        <img src="https://sistao.3bsup.eb.mil.br/{{ session('user')['photo'] }}"
                             class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="http://sistao.3bsup.eb.mil.br/profile/view"
+                        <a href="https://sistao.3bsup.eb.mil.br/profile/view"
                             class="d-block">{{ session('user')['rank'] }}
                             {{ session('user')['professionalName'] }}</a>
                     </div>
@@ -272,7 +273,7 @@
     @yield('plugins')
     <script>
         setInterval(function() {
-            var url = '/get_records_history';
+            var url = '{{ route('get_records_history') }}';
             $.get(url, function(result) {
                 document.getElementById('today').innerText = result.today;
                 document.getElementById('here').innerText = result.here;
