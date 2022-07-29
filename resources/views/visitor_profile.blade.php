@@ -184,7 +184,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="takeSnapShot()">Tira foto</button>
+                <button type="button" class="btn btn-success" id="takeSnapShot">Tira foto</button>
             </div>
         </div>
     </div>

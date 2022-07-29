@@ -28,6 +28,42 @@ $(document).ready(function() {
         $('.fab').removeClass('show');
     });
 
+
+ $('#takeSnapShot').click(function () {
+
+        //Captura elemento de vídeo
+        var video = document.querySelector("#webCamera");
+
+        //Criando um canvas que vai guardar a imagem temporariamente
+        var canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        var ctx = canvas.getContext('2d');
+
+        //Desnehando e convertendo as minensões
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        //Criando o JPG
+         var dataURI = canvas.toDataURL('image/jpeg'); //O resultado é um BASE64 de uma imagem.
+
+        var reader = new FileReader();
+        reader.onload = function() {
+            $image.croppie('bind', {
+                url: dataURI
+            }).then(function() {
+                console.log('jQuery bind complete');
+            });
+        }
+
+        console.log(reader);
+        // reader.readAsDataURL(dataURI);
+        $('#register').modal('hide');
+        $('#uploadimage').modal('show');
+        $('.fab').removeClass('show');
+    });
+
+
+
     $('.crop_image').click(function(event) {
         $image.croppie('result', {
             type: 'canvas',
@@ -179,27 +215,23 @@ function loadCamera(){
 	}
 }
 
-function takeSnapShot(){
-	//Captura elemento de vídeo
-	var video = document.querySelector("#webCamera");
+// function takeSnapShot(){
+// 	//Captura elemento de vídeo
+// 	var video = document.querySelector("#webCamera");
 
-	//Criando um canvas que vai guardar a imagem temporariamente
-	var canvas = document.createElement('canvas');
-	canvas.width = video.videoWidth;
-	canvas.height = video.videoHeight;
-	var ctx = canvas.getContext('2d');
+// 	//Criando um canvas que vai guardar a imagem temporariamente
+// 	var canvas = document.createElement('canvas');
+// 	canvas.width = video.videoWidth;
+// 	canvas.height = video.videoHeight;
+// 	var ctx = canvas.getContext('2d');
 
-	//Desnehando e convertendo as minensões
-	ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+// 	//Desnehando e convertendo as minensões
+// 	ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-	//Criando o JPG
-    var dataURI = canvas.toDataURL('image/jpeg'); //O resultado é um BASE64 de uma imagem.
-
-    
+// 	//Criando o JPG
+//     var dataURI = canvas.toDataURL('image/jpeg'); //O resultado é um BASE64 de uma imagem.
 
 
-
-
-}
+// }
 
 // FIM CAMERA
