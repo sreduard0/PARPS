@@ -44,20 +44,16 @@ $(document).ready(function() {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
         //Criando o JPG
-         var dataURI = canvas.toDataURL('image/jpeg'); //O resultado é um BASE64 de uma imagem.
+        //var dataURI = canvas.toDataURL('image/jpeg');
 
-        var reader = new FileReader();
-        reader.onload = function() {
-            $image.croppie('bind', {
-                url: dataURI
-            }).then(function() {
-                console.log('jQuery bind complete');
-            });
-        }
+        $image.croppie('bind', {
+            url: canvas.toDataURL('image/jpeg')
+        }).then(function() {
+            console.log('Foto capturada')
+        });
 
-        console.log(reader);
-        // reader.readAsDataURL(dataURI);
         $('#register').modal('hide');
+        $('#webcam').modal('hide');
         $('#uploadimage').modal('show');
         $('.fab').removeClass('show');
     });
