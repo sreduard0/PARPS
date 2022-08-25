@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware('auth')->group(function(){
+ Route::get('/get_session', function () {
+        return session('user')['id'];
+    });
     // Records
         Route::get('/', [RecordsController::class, 'records'])->name('home');
         Route::get('record/finish/{action}', [RecordsController::class, 'record_finish'])->name('record_finish');
@@ -72,7 +75,7 @@ Route::middleware('auth')->group(function(){
                 'today' => count($tools->visitors_day())
             ];
             return $data;
-        })->name('get_records_history');
+        });
 
 
   });

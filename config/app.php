@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => true,
+    'debug' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => 'http://parps.3bsup.eb.mil.br ',
+    'url' => 'https://parps.3bsup.eb.mil.br ',
 
     'asset_url' => null,
 
