@@ -1,5 +1,13 @@
-//===================== CORTE DE IMAGEM FORM NOVO VISITANTE
-$(document).ready(function() {
+//===================== CORTE DE IMAGEM FORM
+
+
+$(document).ready(function () {
+       var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
     $image = $('#image_demo').croppie({
         enableExif: true,
         viewport: {
@@ -13,76 +21,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#upload_image').on('change', function() {
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            $image.croppie('bind', {
-                url: event.target.result
-            }).then(function() {
-                console.log('jQuery bind complete');
-            });
-        }
-        reader.readAsDataURL(this.files[0]);
-        $('#register').modal('hide');
-        $('#uploadimage').modal('show');
-        $('.fab').removeClass('show');
-    });
-
-
- $('#takeSnapShot').click(function () {
-
-        //Captura elemento de vídeo
-        var video = document.querySelector("#webCamera");
-
-        //Criando um canvas que vai guardar a imagem temporariamente
-        var canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        var ctx = canvas.getContext('2d');
-
-        //Desnehando e convertendo as minensões
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        //Criando o JPG
-        //var dataURI = canvas.toDataURL('image/jpeg');
-
-        $image.croppie('bind', {
-            url: canvas.toDataURL('image/jpeg')
-        }).then(function() {
-            console.log('Foto capturada')
-        });
-
-        $('#register').modal('hide');
-        $('#webcam').modal('hide');
-        $('#uploadimage').modal('show');
-        $('.fab').removeClass('show');
-    });
-
-
-
-    $('.crop_image').click(function(event) {
-        $image.croppie('result', {
-            type: 'canvas',
-            size: 'viewport'
-        }).then(function (response) {
-            $('#uploadimage').modal('hide');
-            document.getElementById("img_profile").src = response;
-            document.getElementById('image_profile').value = response;
-            $('#register').modal('show');
-        })
-    });
-
-});
-
-//======================== EDITAR FOTO
-$(document).ready(function () {
-    var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 4000
-    });
-    $image_crop = $('#image_prev').croppie({
+    $image_edit = $('#image_prev').croppie({
         enableExif: true,
         viewport: {
             width: 300,
@@ -95,30 +34,62 @@ $(document).ready(function () {
         }
     });
 
-    $('#upload_new_image').on('change', function() {
+    // NOVO VISITANTE
+    $('#upload_image').on('change', function() {
         var reader = new FileReader();
         reader.onload = function(event) {
-            $image_crop.croppie('bind', {
+            $image.croppie('bind', {
                 url: event.target.result
             }).then(function() {
-                console.log('jQuery bind complete');
+                console.log('Foto novo visitante carregada');
+            });
+        }
+        reader.readAsDataURL(this.files[0]);
+        $('#register').modal('hide');
+        $('#uploadimage').modal('show');
+        $('.fab').removeClass('show');
+    });
+
+    $('#crop_image').click(function(event) {
+        $image.croppie('result', {
+            type: 'canvas',
+            size: 'viewport'
+        }).then(function (response) {
+           $('#uploadimage').modal('hide');
+            document.getElementById("img_profile").src = response;
+            document.getElementById('image_profile').value = response;
+            $('#register').modal('show');
+        })
+    });
+
+    // EDITAR FOTO DE perfil
+
+    $('#upload_new_image').on('change', function () {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            $image_edit.croppie('bind', {
+                url: event.target.result
+            }).then(function() {
+                console.log('Nova foto do visitante carregada');
             });
         }
         reader.readAsDataURL(this.files[0]);
         $('#visitor_profile').modal('hide');
-        $('#uploanewdimage').modal('show');
-        $('.fab').removeClass('.show');
+        $('#uploadnewimage').modal('show');
+        $('.fabE').removeClass('show');
+
+
     });
 
-    $('.crop_new_image').click(function(event) {
-        $image_crop.croppie('result', {
+    $('#crop_new_image').click(function(event) {
+          $image_edit.croppie('result', {
             type: 'canvas',
             size: 'viewport'
         }).then(function (response) {
-            $('#uploanewdimage').modal('hide');
+            $('#uploadnewimage').modal('hide');
             document.getElementById("edit_img").src = response;
             var data = {
-                id: $('#id').val(),
+                id: $('#v_id').val(),
                 photo: response,
             };
             $.ajax({
@@ -145,8 +116,60 @@ $(document).ready(function () {
             });
         })
     });
-
 });
+
+    // CAPITURA FOTO VISITANTE
+    function takeSnapShot() {
+        //Captura elemento de vídeo
+        var video = document.querySelector("#webCamera");
+
+        //Criando um canvas que vai guardar a imagem temporariamente
+        var canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        var ctx = canvas.getContext('2d');
+
+        //Desnehando e convertendo as minensões
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        $image.croppie('bind', {
+            url: canvas.toDataURL('image/jpeg')
+        }).then(function() {
+            console.log('Foto capturada')
+        });
+
+        $('#register').modal('hide');
+        $('#webcam').modal('hide');
+        $('#uploadimage').modal('show');
+        $('.fab').removeClass('show');
+    };
+
+    // CAPITURA FOTO PARA EDITAR
+    function takeSnapShotEdit() {
+        //Captura elemento de vídeo
+        var video = document.querySelector("#webCamera");
+
+        //Criando um canvas que vai guardar a imagem temporariamente
+        var canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        var ctx = canvas.getContext('2d');
+
+        //Desnehando e convertendo as minensões
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        $image_edit.croppie('bind', {
+            url: canvas.toDataURL('image/jpeg')
+        }).then(function() {
+            console.log('Foto capturada')
+        });
+
+        $('#visitor_profile').modal('hide');
+        $('#webcam').modal('hide');
+        $('#uploadnewimage').modal('show');
+        $('.fabE').removeClass('show');
+
+    }
 
 
 //BOTAO
@@ -169,6 +192,23 @@ document.querySelectorAll('.fab ul li button').forEach((item)=>{
 });
 
 
+function toggleFAB(fabE){
+	if(document.querySelector(fabE).classList.contains('show')){
+  	document.querySelector(fabE).classList.remove('show');
+  }else{
+  	document.querySelector(fabE).classList.add('show');
+  }
+}
+
+document.querySelector('.fabE .main').addEventListener('click', function(){
+	toggleFAB('.fabE');
+});
+
+document.querySelectorAll('.fabE ul li button').forEach((item)=>{
+	item.addEventListener('click', function(){
+		toggleFAB('.fabE');
+	});
+});
 
 
 // CAMERA
@@ -189,7 +229,7 @@ videoEl.srcObject = null;
 });
 
 
-function loadCamera(){
+function loadCamera(value){
 	//Captura elemento de vídeo
 	var video = document.querySelector("#webCamera");
 		//As opções abaixo são necessárias para o funcionamento correto no iOS
@@ -203,7 +243,13 @@ function loadCamera(){
 		navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: 'user'}})
 		.then( function(stream) {
 			//Definir o elemento víde a carregar o capturado pela webcam
-			video.srcObject = stream;
+            video.srcObject = stream;
+            if (value == 'e') {
+                $('#take').html('<button type="button" class="btn btn-success" onclick="return takeSnapShotEdit()">Tira foto</button>')
+            } else {
+                $('#take').html('<button type="button" class="btn btn-success" onclick="return takeSnapShot()">Tira foto</button>')
+            }
+
 		})
 		.catch(function(error) {
 			alert("Você não possui webcam.");
@@ -211,23 +257,6 @@ function loadCamera(){
 	}
 }
 
-// function takeSnapShot(){
-// 	//Captura elemento de vídeo
-// 	var video = document.querySelector("#webCamera");
 
-// 	//Criando um canvas que vai guardar a imagem temporariamente
-// 	var canvas = document.createElement('canvas');
-// 	canvas.width = video.videoWidth;
-// 	canvas.height = video.videoHeight;
-// 	var ctx = canvas.getContext('2d');
-
-// 	//Desnehando e convertendo as minensões
-// 	ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-// 	//Criando o JPG
-//     var dataURI = canvas.toDataURL('image/jpeg'); //O resultado é um BASE64 de uma imagem.
-
-
-// }
 
 // FIM CAMERA
