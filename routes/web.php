@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function(){
                 'today' => count($tools->visitors_day())
             ];
             return $data;
-        });
+        })->name('get_records_history');
 
 
   });

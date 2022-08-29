@@ -181,7 +181,7 @@ function toggleFAB(fab){
   }
 }
 
-document.querySelector('.fab .main').addEventListener('click', function(){
+$('.fab .main').on('click', function(){
 	toggleFAB('.fab');
 });
 

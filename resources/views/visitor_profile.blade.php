@@ -262,7 +262,6 @@
     </div>
 @endif
 
-
 {{-- SCRIPTS --}}
 <script>
     $('#visitor_profile').on('show.bs.modal', function(event) {

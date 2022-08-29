@@ -235,7 +235,7 @@
         <footer class="main-footer align-items-center ">
             <footer>
                 <div class="text-center">
-                    &copy;PARPS {{ date('Y') }} (v1.3) | integrado com &copy;SisTAO {{ date('Y') }} (v1.5)
+                    &copy;PARPS {{ date('Y') }} (v2) | integrado com &copy;SisTAO {{ date('Y') }} (v1.5)
                     <br>
                     Desenvolvido por: Eduardo Martins
                 </div>
